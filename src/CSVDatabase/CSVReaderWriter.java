@@ -3,15 +3,16 @@ package CSVDatabase;
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
 
-public class CSVReader {
+public class CSVReaderWriter {
     private BufferedReader inFile;
     private String line;
-    public CSVReader(String path, String encoding) {
+    private String path;
+    public CSVReaderWriter(String path, String encoding) {
+        this.path = path;
         try {
             FileInputStream fileInputStream = new FileInputStream(path);
             byte[] bom = new byte[3];
@@ -26,6 +27,8 @@ public class CSVReader {
             e.printStackTrace();
         }
     }
+    
+    
     public String[] getLine()
     {
         try {
@@ -43,5 +46,15 @@ public class CSVReader {
             e.printStackTrace();
         }
         return null;
+    }
+    
+    public void WriteToFile(String text) {
+        try(FileWriter outFile = new FileWriter(path)) {
+            outFile.append(text);
+        } catch(IOException e) {
+            System.out.println("Error writing to " + path);
+            e.printStackTrace();
+        }
+        
     }
 }
