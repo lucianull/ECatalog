@@ -3,9 +3,9 @@ package Models;
 
 public class Date implements Cloneable, Comparable <Date> {
     
-    private int year;
-    private int month;
-    private int day;
+    protected int year;
+    protected int month;
+    protected int day;
 
     public Date() {
         year = 0;
@@ -72,7 +72,7 @@ public class Date implements Cloneable, Comparable <Date> {
     }
     
     @Override
-    public Object clone() throws CloneNotSupportedException {
+    public Object clone() throws CloneNotSupportedException{
         return super.clone();
     }
 }
