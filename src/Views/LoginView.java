@@ -34,12 +34,14 @@ public class LoginView extends javax.swing.JPanel {
 
         setPreferredSize(new java.awt.Dimension(900, 600));
 
-        leftPanel.setBackground(new java.awt.Color(153, 153, 153));
+        leftPanel.setBackground(new java.awt.Color(60, 73, 82));
         leftPanel.setPreferredSize(new java.awt.Dimension(450, 600));
 
+        welcomePanel.setBackground(new java.awt.Color(60, 73, 82));
         welcomePanel.setPreferredSize(new java.awt.Dimension(450, 150));
 
-        welcomeLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        welcomeLabel.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        welcomeLabel.setForeground(new java.awt.Color(191, 205, 214));
         welcomeLabel.setText("Welcome Back");
 
         wrongAccountLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -52,11 +54,11 @@ public class LoginView extends javax.swing.JPanel {
             .addGroup(welcomePanelLayout.createSequentialGroup()
                 .addGroup(welcomePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(welcomePanelLayout.createSequentialGroup()
-                        .addGap(157, 157, 157)
-                        .addComponent(welcomeLabel))
-                    .addGroup(welcomePanelLayout.createSequentialGroup()
                         .addGap(85, 85, 85)
-                        .addComponent(wrongAccountLabel)))
+                        .addComponent(wrongAccountLabel))
+                    .addGroup(welcomePanelLayout.createSequentialGroup()
+                        .addGap(144, 144, 144)
+                        .addComponent(welcomeLabel)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         welcomePanelLayout.setVerticalGroup(
@@ -64,14 +66,16 @@ public class LoginView extends javax.swing.JPanel {
             .addGroup(welcomePanelLayout.createSequentialGroup()
                 .addGap(60, 60, 60)
                 .addComponent(welcomeLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
                 .addComponent(wrongAccountLabel)
                 .addContainerGap())
         );
 
+        jPanel3.setBackground(new java.awt.Color(60, 73, 82));
         jPanel3.setPreferredSize(new java.awt.Dimension(450, 150));
 
         emailLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        emailLabel.setForeground(new java.awt.Color(191, 205, 214));
         emailLabel.setText("Email Adress");
 
         emailTextbox.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -102,9 +106,11 @@ public class LoginView extends javax.swing.JPanel {
                 .addContainerGap(42, Short.MAX_VALUE))
         );
 
+        jPanel6.setBackground(new java.awt.Color(60, 73, 82));
         jPanel6.setPreferredSize(new java.awt.Dimension(450, 150));
 
         passwordLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        passwordLabel.setForeground(new java.awt.Color(191, 205, 214));
         passwordLabel.setText("Password");
 
         passwordTextbox.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -135,6 +141,7 @@ public class LoginView extends javax.swing.JPanel {
                 .addContainerGap(52, Short.MAX_VALUE))
         );
 
+        jPanel2.setBackground(new java.awt.Color(60, 73, 82));
         jPanel2.setPreferredSize(new java.awt.Dimension(450, 150));
 
         loginButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -185,7 +192,7 @@ public class LoginView extends javax.swing.JPanel {
                 .addGap(0, 0, 0))
         );
 
-        rightPanel.setBackground(new java.awt.Color(107, 107, 107));
+        rightPanel.setBackground(new java.awt.Color(43, 56, 65));
         rightPanel.setForeground(new java.awt.Color(204, 204, 204));
         rightPanel.setPreferredSize(new java.awt.Dimension(450, 600));
 
