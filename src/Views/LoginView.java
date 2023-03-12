@@ -245,7 +245,7 @@ public class LoginView extends javax.swing.JPanel {
 
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
         if(usersController.CheckAccount(emailTextbox.getText(), passwordTextbox.getText()) == true){
-            App.getInstance().showCard("mainPanel");
+            App.getInstance().showCard("mainViewStudent");
         }
         else
         {

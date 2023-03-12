@@ -32,26 +32,13 @@ public class App extends javax.swing.JFrame {
 
         cards = new javax.swing.JPanel();
         loginPanel = new Views.LoginView();
-        mainPanel = new Views.MainView();
+        mainViewStudent = new Views.MainViewStudent();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(900, 600));
 
         cards.setLayout(new java.awt.CardLayout());
         cards.add(loginPanel, "loginPanel");
-
-        javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
-        mainPanel.setLayout(mainPanelLayout);
-        mainPanelLayout.setHorizontalGroup(
-            mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 900, Short.MAX_VALUE)
-        );
-        mainPanelLayout.setVerticalGroup(
-            mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 600, Short.MAX_VALUE)
-        );
-
-        cards.add(mainPanel, "mainPanel");
+        cards.add(mainViewStudent, "mainViewStudent");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -78,6 +65,6 @@ public class App extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel cards;
     private Views.LoginView loginPanel;
-    private Views.MainView mainPanel;
+    private Views.MainViewStudent mainViewStudent;
     // End of variables declaration//GEN-END:variables
 }
