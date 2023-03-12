@@ -197,7 +197,7 @@ public class LoginView extends javax.swing.JPanel {
         rightPanel.setPreferredSize(new java.awt.Dimension(450, 600));
 
         titleLabel.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        titleLabel.setForeground(new java.awt.Color(204, 204, 204));
+        titleLabel.setForeground(new java.awt.Color(191, 205, 214));
         titleLabel.setIcon(new javax.swing.ImageIcon("C:\\Informatica\\An 2\\Sem2\\PAO\\ECatalogV2\\src\\Misc\\logo.png")); // NOI18N
         titleLabel.setText("ECatalog");
         titleLabel.setToolTipText("");
