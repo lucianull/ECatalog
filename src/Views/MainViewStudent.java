@@ -9,15 +9,17 @@ public class MainViewStudent extends javax.swing.JPanel {
     private Color background;
     private Color foreground;
     private Color lightBackground;
+    private Color activeForeground;
     private JLabel lastSwitched = null;
     
     public MainViewStudent() {
         background = new Color(43, 56, 65);
         foreground = new Color(191, 205, 214);
         lightBackground = new Color(60,73,82);
+        activeForeground = new Color(77,133,114);
         initComponents();
         lastSwitched = dashboardLabel;
-        setLabelColor(dashboardLabel, background);
+        setLabelColor(dashboardLabel, background, activeForeground);
     }
 
     @SuppressWarnings("unchecked")
@@ -131,8 +133,8 @@ public class MainViewStudent extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void switchMenuLabel(JLabel label) {
-        setLabelColor(lastSwitched, lightBackground);
-        setLabelColor(label, background);
+        setLabelColor(lastSwitched, lightBackground, foreground);
+        setLabelColor(label, background, activeForeground);
         lastSwitched = label;
     }
     
@@ -148,8 +150,9 @@ public class MainViewStudent extends javax.swing.JPanel {
         switchMenuLabel(gradesLabel);
     }//GEN-LAST:event_gradesLabelMouseClicked
 
-    private void setLabelColor(JLabel label, Color color) {
-        label.setBackground(color);
+    private void setLabelColor(JLabel label, Color bg, Color fg) {
+        label.setBackground(bg);
+        label.setForeground(fg);
         label.setOpaque(true);
     }
     
