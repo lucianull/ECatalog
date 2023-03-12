@@ -17,6 +17,7 @@ public class MainViewStudent extends javax.swing.JPanel {
         lightBackground = new Color(60,73,82);
         initComponents();
         lastSwitched = dashboardLabel;
+        setLabelColor(dashboardLabel, background);
     }
 
     @SuppressWarnings("unchecked")
@@ -130,10 +131,8 @@ public class MainViewStudent extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void switchMenuLabel(JLabel label) {
-        lastSwitched.setBackground(lightBackground);
-        lastSwitched.setOpaque(true);
-        label.setBackground(background);
-        label.setOpaque(true);
+        setLabelColor(lastSwitched, lightBackground);
+        setLabelColor(label, background);
         lastSwitched = label;
     }
     
@@ -149,7 +148,11 @@ public class MainViewStudent extends javax.swing.JPanel {
         switchMenuLabel(gradesLabel);
     }//GEN-LAST:event_gradesLabelMouseClicked
 
-
+    private void setLabelColor(JLabel label, Color color) {
+        label.setBackground(color);
+        label.setOpaque(true);
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private Views.Widgets.PanelRound SideMenu;
     private javax.swing.JLabel dashboardLabel;
