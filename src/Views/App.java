@@ -2,10 +2,9 @@ package Views;
 
 import Controllers.UsersController;
 import java.awt.CardLayout;
-import javax.swing.JPanel;
 
 public class App extends javax.swing.JFrame {
-    
+
     private static App instance = null;
     private CardLayout cardLayout;
     private UsersController userController;
@@ -19,7 +18,7 @@ public class App extends javax.swing.JFrame {
     }
 
     public static App getInstance() {
-        if(instance == null) {
+        if (instance == null) {
             instance = new App();
             instance.setVisible(true);
         }
@@ -30,11 +29,11 @@ public class App extends javax.swing.JFrame {
         this.mainViewStudent = mainViewStudent;
         cards.add(mainViewStudent, "mainViewStudent");
     }
-    
+
     public void showCard(String name) {
         cardLayout.show(cards, name);
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -45,13 +44,13 @@ public class App extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         cards.setLayout(new java.awt.CardLayout());
-        cards.add(loginView, "loginPanel");
+        cards.add(loginView, "loginView");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(cards, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(cards, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -66,9 +65,9 @@ public class App extends javax.swing.JFrame {
      */
     public static void main(String args[]) {
         App app = App.getInstance();
-        app.showCard("loginPanel");
+        app.showCard("loginView");
     }
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel cards;
     private Views.LoginView loginView;

@@ -47,7 +47,7 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Container class="Views.Widgets.PanelRound" name="SideMenu">
+    <Container class="Views.PanelRound" name="SideMenu">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="52" green="49" red="3c" type="rgb"/>
@@ -158,7 +158,7 @@
         </Component>
       </SubComponents>
     </Container>
-    <Container class="Views.Widgets.PanelRound" name="mainViewCardLayout">
+    <Container class="Views.PanelRound" name="mainViewCardLayout">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="52" green="49" red="3c" type="rgb"/>
@@ -171,7 +171,7 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.DesignCardLayout"/>
       <SubComponents>
-        <Container class="Views.Widgets.PanelRound" name="dashboardPanel">
+        <Container class="Views.PanelRound" name="dashboardPanel">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="52" green="49" red="3c" type="rgb"/>
@@ -236,7 +236,7 @@
                 </Property>
               </Properties>
             </Component>
-            <Container class="Views.Widgets.PanelRound" name="panelRound1">
+            <Container class="Views.PanelRound" name="panelRound1">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="52" green="49" red="3c" type="rgb"/>
@@ -451,7 +451,7 @@
             </Container>
           </SubComponents>
         </Container>
-        <Container class="Views.Widgets.PanelRound" name="gradesPanel">
+        <Container class="Views.PanelRound" name="gradesPanel">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="52" green="49" red="3c" type="rgb"/>
@@ -480,7 +480,7 @@
             </DimensionLayout>
           </Layout>
         </Container>
-        <Container class="Views.Widgets.PanelRound" name="schedulePanel">
+        <Container class="Views.PanelRound" name="schedulePanel">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="52" green="49" red="3c" type="rgb"/>

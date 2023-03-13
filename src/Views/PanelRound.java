@@ -1,4 +1,4 @@
-package Views.Widgets;
+package Views;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
