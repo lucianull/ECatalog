@@ -11,6 +11,7 @@ public class MainViewStudent extends javax.swing.JPanel {
     
     private Color background;
     private Color foreground;
+    
     private Color lightBackground;
     private Color activeForeground;
     private JLabel lastSwitched = null;
