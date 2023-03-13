@@ -47,16 +47,16 @@ public class MainViewStudent extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        SideMenu = new Views.Widgets.PanelRound();
+        SideMenu = new Views.PanelRound();
         titleLabel = new javax.swing.JLabel();
         dashboardLabel = new javax.swing.JLabel();
         scheduleLabel = new javax.swing.JLabel();
         gradesLabel = new javax.swing.JLabel();
-        mainViewCardLayout = new Views.Widgets.PanelRound();
-        dashboardPanel = new Views.Widgets.PanelRound();
+        mainViewCardLayout = new Views.PanelRound();
+        dashboardPanel = new Views.PanelRound();
         studentNameLabel = new javax.swing.JLabel();
         studentEmailLabel = new javax.swing.JLabel();
-        panelRound1 = new Views.Widgets.PanelRound();
+        panelRound1 = new Views.PanelRound();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -68,8 +68,8 @@ public class MainViewStudent extends javax.swing.JPanel {
         birthdateLabel = new javax.swing.JLabel();
         classLabel = new javax.swing.JLabel();
         classMasterLabel = new javax.swing.JLabel();
-        gradesPanel = new Views.Widgets.PanelRound();
-        schedulePanel = new Views.Widgets.PanelRound();
+        gradesPanel = new Views.PanelRound();
+        schedulePanel = new Views.PanelRound();
 
         setBackground(new java.awt.Color(43, 56, 65));
         setPreferredSize(new java.awt.Dimension(900, 600));
@@ -388,26 +388,26 @@ public class MainViewStudent extends javax.swing.JPanel {
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private Views.Widgets.PanelRound SideMenu;
+    private Views.PanelRound SideMenu;
     private javax.swing.JLabel birthdateLabel;
     private javax.swing.JLabel classLabel;
     private javax.swing.JLabel classMasterLabel;
     private javax.swing.JLabel dashboardLabel;
-    private Views.Widgets.PanelRound dashboardPanel;
+    private Views.PanelRound dashboardPanel;
     private javax.swing.JLabel gradesLabel;
-    private Views.Widgets.PanelRound gradesPanel;
+    private Views.PanelRound gradesPanel;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private Views.Widgets.PanelRound mainViewCardLayout;
+    private Views.PanelRound mainViewCardLayout;
     private javax.swing.JLabel matriculationNrLabel;
-    private Views.Widgets.PanelRound panelRound1;
+    private Views.PanelRound panelRound1;
     private javax.swing.JLabel residenceLabel;
     private javax.swing.JLabel scheduleLabel;
-    private Views.Widgets.PanelRound schedulePanel;
+    private Views.PanelRound schedulePanel;
     private javax.swing.JLabel studentEmailLabel;
     private javax.swing.JLabel studentNameLabel;
     private javax.swing.JLabel titleLabel;

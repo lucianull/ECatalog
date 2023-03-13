@@ -57,6 +57,9 @@
         <Property name="roundTopLeft" type="int" value="25"/>
         <Property name="roundTopRight" type="int" value="25"/>
       </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new Views.PanelRound()"/>
+      </AuxValues>
 
       <Layout>
         <DimensionLayout dim="0">
@@ -168,6 +171,9 @@
         <Property name="roundTopLeft" type="int" value="25"/>
         <Property name="roundTopRight" type="int" value="25"/>
       </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new Views.PanelRound()"/>
+      </AuxValues>
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.DesignCardLayout"/>
       <SubComponents>
@@ -181,6 +187,9 @@
             <Property name="roundTopLeft" type="int" value="25"/>
             <Property name="roundTopRight" type="int" value="25"/>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new Views.PanelRound()"/>
+          </AuxValues>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
               <CardConstraints cardName="dashboardPanel"/>
@@ -253,6 +262,9 @@
                 <Property name="roundTopLeft" type="int" value="25"/>
                 <Property name="roundTopRight" type="int" value="25"/>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new Views.PanelRound()"/>
+              </AuxValues>
 
               <Layout>
                 <DimensionLayout dim="0">
@@ -461,6 +473,9 @@
             <Property name="roundTopLeft" type="int" value="25"/>
             <Property name="roundTopRight" type="int" value="25"/>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new Views.PanelRound()"/>
+          </AuxValues>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
               <CardConstraints cardName="gradesPanel"/>
@@ -494,6 +509,9 @@
             <Property name="roundTopLeft" type="int" value="25"/>
             <Property name="roundTopRight" type="int" value="25"/>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new Views.PanelRound()"/>
+          </AuxValues>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
               <CardConstraints cardName="schedulePanel"/>
