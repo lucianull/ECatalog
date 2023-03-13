@@ -1,5 +1,6 @@
 package Views;
 import Controllers.UsersController;
+import Models.Student;
 import java.awt.CardLayout;
 import java.awt.Color;
 import javax.swing.JLabel;
@@ -27,8 +28,19 @@ public class MainViewStudent extends javax.swing.JPanel {
         setLabelColor(dashboardLabel, background, activeForeground);
         cardLayout = (CardLayout) mainViewCardLayout.getLayout();
         cardLayout.show(mainViewCardLayout, "dashboardPanel");
+        setDashboard();
+        
+    }
+    
+    private void setDashboard() {
         studentNameLabel.setText(userController.getFullName());
         studentEmailLabel.setText(userController.getEmail());
+        matriculationNrLabel.setText(((Student)userController.getUser()).getMatriculationNr());
+        birthdateLabel.setText(userController.getUser().getBirthDate().toString());
+        residenceLabel.setText(userController.getUser().getResidence().toString());
+        classLabel.setText(String.valueOf(((Student)userController.getUser()).getClassId()));
+        classMasterLabel.setText("");
+        
     }
 
     @SuppressWarnings("unchecked")
@@ -51,6 +63,11 @@ public class MainViewStudent extends javax.swing.JPanel {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
+        matriculationNrLabel = new javax.swing.JLabel();
+        residenceLabel = new javax.swing.JLabel();
+        birthdateLabel = new javax.swing.JLabel();
+        classLabel = new javax.swing.JLabel();
+        classMasterLabel = new javax.swing.JLabel();
         gradesPanel = new Views.Widgets.PanelRound();
         schedulePanel = new Views.Widgets.PanelRound();
 
@@ -175,6 +192,21 @@ public class MainViewStudent extends javax.swing.JPanel {
         jLabel8.setForeground(new java.awt.Color(191, 205, 214));
         jLabel8.setText("Class:");
 
+        matriculationNrLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        matriculationNrLabel.setForeground(new java.awt.Color(191, 205, 214));
+
+        residenceLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        residenceLabel.setForeground(new java.awt.Color(191, 205, 214));
+
+        birthdateLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        birthdateLabel.setForeground(new java.awt.Color(191, 205, 214));
+
+        classLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        classLabel.setForeground(new java.awt.Color(191, 205, 214));
+
+        classMasterLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        classMasterLabel.setForeground(new java.awt.Color(191, 205, 214));
+
         javax.swing.GroupLayout panelRound1Layout = new javax.swing.GroupLayout(panelRound1);
         panelRound1.setLayout(panelRound1Layout);
         panelRound1Layout.setHorizontalGroup(
@@ -186,11 +218,26 @@ public class MainViewStudent extends javax.swing.JPanel {
             .addGroup(panelRound1Layout.createSequentialGroup()
                 .addGap(14, 14, 14)
                 .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel8)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel7))
+                    .addGroup(panelRound1Layout.createSequentialGroup()
+                        .addComponent(jLabel8)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(classLabel))
+                    .addGroup(panelRound1Layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(matriculationNrLabel))
+                    .addGroup(panelRound1Layout.createSequentialGroup()
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(classMasterLabel))
+                    .addGroup(panelRound1Layout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(birthdateLabel))
+                    .addGroup(panelRound1Layout.createSequentialGroup()
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(residenceLabel)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelRound1Layout.setVerticalGroup(
@@ -199,15 +246,25 @@ public class MainViewStudent extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jLabel4)
                 .addGap(32, 32, 32)
-                .addComponent(jLabel3)
+                .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(matriculationNrLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel5)
+                .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(birthdateLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel7)
+                .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(residenceLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel8)
+                .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(classLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel6)
+                .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(classMasterLabel))
                 .addContainerGap(203, Short.MAX_VALUE))
         );
 
@@ -332,6 +389,9 @@ public class MainViewStudent extends javax.swing.JPanel {
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private Views.Widgets.PanelRound SideMenu;
+    private javax.swing.JLabel birthdateLabel;
+    private javax.swing.JLabel classLabel;
+    private javax.swing.JLabel classMasterLabel;
     private javax.swing.JLabel dashboardLabel;
     private Views.Widgets.PanelRound dashboardPanel;
     private javax.swing.JLabel gradesLabel;
@@ -343,7 +403,9 @@ public class MainViewStudent extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private Views.Widgets.PanelRound mainViewCardLayout;
+    private javax.swing.JLabel matriculationNrLabel;
     private Views.Widgets.PanelRound panelRound1;
+    private javax.swing.JLabel residenceLabel;
     private javax.swing.JLabel scheduleLabel;
     private Views.Widgets.PanelRound schedulePanel;
     private javax.swing.JLabel studentEmailLabel;

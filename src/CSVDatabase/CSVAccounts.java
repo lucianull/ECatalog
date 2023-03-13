@@ -5,6 +5,7 @@ import Models.Address;
 import Models.Date;
 import Models.Professor;
 import Models.Student;
+import Models.User;
 import java.util.List;
 import java.util.HashMap;
 import java.util.Map;
@@ -42,20 +43,18 @@ public class CSVAccounts {
                 availableIds.push(i);
     }
     
-    public int[] checkLoginAccount(String email, String password) {
-        int [] retValue = new int[2];
-        retValue[0] = 1;
-        retValue[1] = -1;
+    public Pair < Boolean, User > checkLoginAccount(String email, String password) {
+        Pair < Boolean, User > retValue = new Pair <Boolean, User >(true, null);
         if(EmailPasswordMap.containsKey(email) == false){
-            retValue[0] = 0;
+            retValue.setFirst(false);
             return retValue;
         }
         if((EmailPasswordMap.get(email)).getSecond().equals(password) == false)
         {
-            retValue[0] = 0;
+            retValue.setFirst(false);
             return retValue;
         }
-        retValue[1] = EmailPasswordMap.get(email).getFirst();
+        retValue.setSecond(studentsAccounts.get(EmailPasswordMap.get(email).getFirst()));
         return retValue;
     }
     
@@ -80,12 +79,4 @@ public class CSVAccounts {
         return newId;
     }
     
-    
-    public String getFullName(int id) {
-        return studentsAccounts.get(id).getLastName() + ' ' + studentsAccounts.get(id).getFirstName();
-    }
-    
-    public String getEmail(int id) {
-        return studentsAccounts.get(id).getEmail();
-    }
 }

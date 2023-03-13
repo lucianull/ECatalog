@@ -2,29 +2,34 @@
 package Controllers;
 
 import CSVDatabase.CSVDatabase;
+import Misc.Pair;
+import Models.User;
 
 
 public class UsersController {
     private CSVDatabase csvDatabase;
-    private int currentUserId;
+    private User currentUser;
     
     
     public UsersController() {
         csvDatabase = new CSVDatabase();
     }
     public boolean CheckAccount(String email, String password) {
-        int [] response = csvDatabase.checkAccount(email, password);
-        if(response[0] > 0)
+        Pair < Boolean, User > response = csvDatabase.checkAccount(email, password);
+        if(response.getFirst())
         {
-            currentUserId = response[1];
+            currentUser = response.getSecond();
             return true;
         }
         return false;
     }
     public String getFullName() {
-        return csvDatabase.getFullName(currentUserId);
+        return currentUser.getLastName() + ' ' + currentUser.getFirstName();
     }
     public String getEmail() {
-        return csvDatabase.getEmail(currentUserId);
+        return currentUser.getEmail();
+    }
+    public User getUser() {
+        return currentUser;
     }
 }

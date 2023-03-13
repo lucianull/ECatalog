@@ -4,6 +4,9 @@
  */
 package CSVDatabase;
 
+import Misc.Pair;
+import Models.User;
+
 
 public class CSVDatabase {
     
@@ -20,14 +23,7 @@ public class CSVDatabase {
             apartment, city, county, year, month, day, classId, matriculationNr, parentFirstName, 
             parentLastName, parentPhoneNumber, parentEmail, roleId);
     }
-    public int[] checkAccount(String email, String password) {
+    public Pair < Boolean, User > checkAccount(String email, String password) {
         return AccountsDb.checkLoginAccount(email, password);
-    }
-    
-    public String getFullName(int id) {
-        return AccountsDb.getFullName(id);
-    }
-    public String getEmail(int id) {
-        return AccountsDb.getEmail(id);
     }
 }
