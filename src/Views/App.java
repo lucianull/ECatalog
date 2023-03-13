@@ -1,5 +1,6 @@
 package Views;
 
+import Controllers.UsersController;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
 
@@ -7,8 +8,11 @@ public class App extends javax.swing.JFrame {
     
     private static App instance = null;
     private CardLayout cardLayout;
+    private UsersController userController;
+    private MainViewStudent mainViewStudent = null;
 
     private App() {
+        userController = new UsersController();
         initComponents();
         cardLayout = (CardLayout) cards.getLayout();
         getContentPane().add(cards);
@@ -21,6 +25,11 @@ public class App extends javax.swing.JFrame {
         }
         return instance;
     }
+
+    public void setMainViewStudent(MainViewStudent mainViewStudent) {
+        this.mainViewStudent = mainViewStudent;
+        cards.add(mainViewStudent, "mainViewStudent");
+    }
     
     public void showCard(String name) {
         cardLayout.show(cards, name);
@@ -31,14 +40,12 @@ public class App extends javax.swing.JFrame {
     private void initComponents() {
 
         cards = new javax.swing.JPanel();
-        loginPanel = new Views.LoginView();
-        mainViewStudent = new Views.MainViewStudent();
+        loginView = new Views.LoginView(userController);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         cards.setLayout(new java.awt.CardLayout());
-        cards.add(loginPanel, "loginPanel");
-        cards.add(mainViewStudent, "mainViewStudent");
+        cards.add(loginView, "loginPanel");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -64,7 +71,6 @@ public class App extends javax.swing.JFrame {
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel cards;
-    private Views.LoginView loginPanel;
-    private Views.MainViewStudent mainViewStudent;
+    private Views.LoginView loginView;
     // End of variables declaration//GEN-END:variables
 }

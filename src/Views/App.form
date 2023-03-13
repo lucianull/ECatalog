@@ -37,17 +37,13 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.DesignCardLayout"/>
       <SubComponents>
-        <Component class="Views.LoginView" name="loginPanel">
+        <Component class="Views.LoginView" name="loginView">
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new Views.LoginView(userController)"/>
+          </AuxValues>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
               <CardConstraints cardName="loginPanel"/>
-            </Constraint>
-          </Constraints>
-        </Component>
-        <Component class="Views.MainViewStudent" name="mainViewStudent">
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
-              <CardConstraints cardName="mainViewStudent"/>
             </Constraint>
           </Constraints>
         </Component>

@@ -68,7 +68,7 @@ public class Date implements Cloneable, Comparable <Date> {
     
     @Override
     public String toString() {
-        return String.format("%04d-%02d-%02d", year, month, day);
+        return String.format("%02d-%02d-%04d", day, month, year);
     }
     
     @Override

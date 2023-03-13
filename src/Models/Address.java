@@ -2,7 +2,7 @@ package Models;
 
 public class Address implements Cloneable {
     private String street, number, block, sc, city, county;
-    private int addressId, apartment, level;
+    private int apartment, level;
     
     public Address() {
        street = "";
@@ -11,19 +11,17 @@ public class Address implements Cloneable {
        sc = "";
        city = "";
        county = "";
-       addressId = 0;
        apartment = 0;
        level = 0;
     }
     
-    public Address(int addressId, String street, String number, String block, String sc, int level, int apartment, String city, String county) {
+    public Address(String street, String number, String block, String sc, int level, int apartment, String city, String county) {
        this.street = street;
        this.number = number;
        this.block = block;
        this.sc = sc;
        this.city = city;
        this.county = county;
-       this.addressId = addressId;
        this.apartment = apartment;
        this.level = level;
     }
@@ -35,7 +33,6 @@ public class Address implements Cloneable {
        this.sc = adress.sc;
        this.city = adress.city;
        this.county = adress.county;
-       this.addressId = adress.addressId;
        this.apartment = adress.apartment;
        this.level = adress.level;
     }
@@ -88,14 +85,6 @@ public class Address implements Cloneable {
         this.county = county;
     }
 
-    public int getAddressId() {
-        return addressId;
-    }
-
-    public void setAddressId(int adressId) {
-        this.addressId = adressId;
-    }
-
     public int getApartment() {
         return apartment;
     }
@@ -116,4 +105,10 @@ public class Address implements Cloneable {
     public Object clone() throws CloneNotSupportedException {
         return super.clone();
     }
+
+    @Override
+    public String toString() {
+        return street + ',' + number + ',' + sc + ',' + block + ',' + level + ',' + apartment + ',' + city + ',' + county;
+    }
+    
 }

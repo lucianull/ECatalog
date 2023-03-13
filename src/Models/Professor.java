@@ -6,8 +6,7 @@ package Models;
 
 public class Professor extends User {
     
-    public Professor(String firstName, String lastName, String email, String phoneNumber, int userId, Address residence, Date birthDate) {
-        super(firstName, lastName, email, phoneNumber, userId, residence, birthDate);
+    public Professor(String firstName, String lastName, String email, String phoneNumber, int userId, Address residence, Date birthDate, int roleId, String password) {
+        super(firstName, lastName, email, phoneNumber, userId, residence, birthDate, roleId, password);
     }
-    
 }

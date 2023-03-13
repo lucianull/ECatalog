@@ -7,9 +7,9 @@ public class LoginView extends javax.swing.JPanel {
     /**
      * Creates new form LoginView
      */
-    public LoginView() {
+    public LoginView(UsersController userController) {
         initComponents();
-        usersController = new UsersController();
+        usersController = userController;
     }
 
    
@@ -252,6 +252,7 @@ public class LoginView extends javax.swing.JPanel {
 
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
         if(usersController.CheckAccount(emailTextbox.getText(), passwordTextbox.getText()) == true){
+            App.getInstance().setMainViewStudent(new MainViewStudent(usersController));
             App.getInstance().showCard("mainViewStudent");
         }
         else

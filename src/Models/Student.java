@@ -11,8 +11,8 @@ public class Student extends User {
     private String parentEmail;
     
     public Student(String firstName, String lastName, String email, String phoneNumber, int userId, Address residence, Date birthDate, 
-            int classId, String matriculationNr, String parentFirstName, String parentLastName, String parentPhoneNumber, String parentEmail) {
-        super(firstName, lastName, email, phoneNumber, userId, residence, birthDate);
+            int classId, String matriculationNr, String parentFirstName, String parentLastName, String parentPhoneNumber, String parentEmail, int roleId, String password) {
+        super(firstName, lastName, email, phoneNumber, userId, residence, birthDate, roleId, password);
         this.classId = classId;
         this.matriculationNr = matriculationNr;
         this.parentFirstName = parentFirstName;
@@ -68,4 +68,10 @@ public class Student extends User {
     public void setParentEmail(String parentEmail) {
         this.parentEmail = parentEmail;
     }
+
+    @Override
+    public String toString() {
+        return getUserId() + ',' + getEmail() + ',' + getPassword() + ',' + getFirstName() + ',' + getLastName() + ',' + getPhoneNumber() + ',' + getResidence().toString() + ',' + getBirthDate().toString() + ',' + classId + ',' + matriculationNr + ',' + parentFirstName + ',' + parentLastName + ',' + parentPhoneNumber + ',' + parentEmail + ',' + getRoleId();
+    }
+    
 }
