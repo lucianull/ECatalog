@@ -77,6 +77,9 @@ CREATE TABLE Grades (
   studentId INT NOT NULL,
   subjectId INT NOT NULL,
   grade DECIMAL(3,2) NOT NULL,
+  gradeDate DATE NOT NULL,
+  semester BIT(1) NOT NULL,
+  thesis BIT(1) NOT NULL,
   PRIMARY KEY (gradeId),
   FOREIGN KEY (studentId) REFERENCES Users(userId),
   FOREIGN KEY (subjectId) REFERENCES Subjects(subjectId)
@@ -194,17 +197,18 @@ INSERT INTO Courses (starting_time_hour, starting_time_minute, subjectId, classI
 (17, 0, 2, 5, 6, 'Friday');
 
 -- Inserts for Grades table
-INSERT INTO Grades (studentId, subjectId, grade) VALUES
-(1, 1, 7.5),
-(1, 2, 8.2),
-(2, 3, 6.9),
-(2, 4, 9.1),
-(3, 2, 7.8),
-(3, 4, 8.5),
-(4, 1, 6.7),
-(4, 3, 7.1),
-(5, 1, 8.9),
-(5, 3, 9.3);
+INSERT INTO Grades (studentId, subjectId, grade, gradeDate, semester, thesis) 
+VALUES
+  (1, 1, 7.5, '2022-03-30', b'1', b'0'),
+  (1, 2, 8.2, '2022-03-30', b'1', b'1'),
+  (2, 3, 6.9, '2022-03-30', b'1', b'0'),
+  (2, 4, 9.1, '2022-03-30', b'1', b'1'),
+  (3, 2, 7.8, '2022-03-30', b'1', b'0'),
+  (3, 4, 8.5, '2022-03-30', b'1', b'1'),
+  (4, 1, 6.7, '2022-03-30', b'1', b'0'),
+  (4, 3, 7.1, '2022-03-30', b'1', b'1'),
+  (5, 1, 8.9, '2022-03-30', b'1', b'0'),
+  (5, 3, 9.3, '2022-03-30', b'1', b'1');
 
 -- Inserts for StudentAbsences table
 INSERT INTO StudentAbsences (studentId, subjectId, absence_date)

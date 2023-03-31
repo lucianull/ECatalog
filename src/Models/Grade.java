@@ -1,19 +1,24 @@
 package Models;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.Objects;
 
 public class Grade implements Cloneable{
     private int gradeId;
     private int studentId;
     private int subjectId;
     private float grade;
+    private Date gradeDate;
+    private byte semester;
+    private byte thesis;
 
-    public Grade(int gradeId, int studentId, int subjectId, float grade) {
+    public Grade(int gradeId, int studentId, int subjectId, float grade, Date gradeDate, byte semester, byte thesis) {
         this.gradeId = gradeId;
         this.studentId = studentId;
         this.subjectId = subjectId;
         this.grade = grade;
+        this.gradeDate = gradeDate;
+        this.semester = semester;
+        this.thesis = thesis;
     }
 
     public int getGradeId() {
@@ -48,6 +53,30 @@ public class Grade implements Cloneable{
         this.grade = grade;
     }
 
+    public Date getGradeDate() {
+        return gradeDate;
+    }
+
+    public void setGradeDate(Date gradeDate) {
+        this.gradeDate = gradeDate;
+    }
+
+    public byte getSemester() {
+        return semester;
+    }
+
+    public void setSemester(byte semester) {
+        this.semester = semester;
+    }
+
+    public byte getThesis() {
+        return thesis;
+    }
+
+    public void setThesis(byte thesis) {
+        this.thesis = thesis;
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -69,18 +98,20 @@ public class Grade implements Cloneable{
         if (this.subjectId != other.subjectId) {
             return false;
         }
-        return Float.floatToIntBits(this.grade) == Float.floatToIntBits(other.grade);
+        if (Float.floatToIntBits(this.grade) != Float.floatToIntBits(other.grade)) {
+            return false;
+        }
+        if (this.semester != other.semester) {
+            return false;
+        }
+        if (this.thesis != other.thesis) {
+            return false;
+        }
+        return Objects.equals(this.gradeDate, other.gradeDate);
     }
     
-    @Override
-    public Grade clone()
-    {
-        try {
-            Grade clone = (Grade) super.clone();
-            return clone;
-        } catch (CloneNotSupportedException e) {
-            throw new AssertionError();
-        }
+    public Grade clone() throws CloneNotSupportedException {
+        return (Grade) super.clone();
     }
     
 }

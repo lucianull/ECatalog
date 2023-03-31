@@ -62,8 +62,9 @@ public class MainViewStudent extends javax.swing.JPanel {
         SideMenu = new Views.PanelRound();
         titleLabel = new javax.swing.JLabel();
         dashboardLabel = new javax.swing.JLabel();
-        scheduleLabel = new javax.swing.JLabel();
         gradesLabel = new javax.swing.JLabel();
+        scheduleLabel = new javax.swing.JLabel();
+        absencesLabel = new javax.swing.JLabel();
         mainViewCardLayout = new Views.PanelRound();
         dashboardPanel = new Views.PanelRound();
         studentNameLabel = new javax.swing.JLabel();
@@ -82,6 +83,7 @@ public class MainViewStudent extends javax.swing.JPanel {
         classMasterLabel = new javax.swing.JLabel();
         gradesPanel = new Views.PanelRound();
         schedulePanel = new Views.PanelRound();
+        absencesPanel = new Views.PanelRound();
 
         setBackground(new java.awt.Color(43, 56, 65));
         setPreferredSize(new java.awt.Dimension(900, 600));
@@ -108,6 +110,16 @@ public class MainViewStudent extends javax.swing.JPanel {
             }
         });
 
+        gradesLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        gradesLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        gradesLabel.setForeground(new java.awt.Color(191, 205, 214));
+        gradesLabel.setText("Grades");
+        gradesLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                gradesLabelMouseClicked(evt);
+            }
+        });
+
         scheduleLabel.setHorizontalAlignment(SwingConstants.CENTER);
         scheduleLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         scheduleLabel.setForeground(new java.awt.Color(191, 205, 214));
@@ -118,13 +130,13 @@ public class MainViewStudent extends javax.swing.JPanel {
             }
         });
 
-        gradesLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        gradesLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        gradesLabel.setForeground(new java.awt.Color(191, 205, 214));
-        gradesLabel.setText("Grades");
-        gradesLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+        absencesLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        absencesLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        absencesLabel.setForeground(new java.awt.Color(191, 205, 214));
+        absencesLabel.setText("Absences");
+        absencesLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                gradesLabelMouseClicked(evt);
+                absencesLabelMouseClicked(evt);
             }
         });
 
@@ -137,8 +149,9 @@ public class MainViewStudent extends javax.swing.JPanel {
                 .addGap(32, 32, 32)
                 .addComponent(titleLabel)
                 .addContainerGap(26, Short.MAX_VALUE))
-            .addComponent(scheduleLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(gradesLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(scheduleLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(absencesLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         SideMenuLayout.setVerticalGroup(
             SideMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -151,6 +164,8 @@ public class MainViewStudent extends javax.swing.JPanel {
                 .addComponent(gradesLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(scheduleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(absencesLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -224,7 +239,7 @@ public class MainViewStudent extends javax.swing.JPanel {
         panelRound1Layout.setHorizontalGroup(
             panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound1Layout.createSequentialGroup()
-                .addContainerGap(210, Short.MAX_VALUE)
+                .addContainerGap(204, Short.MAX_VALUE)
                 .addComponent(jLabel4)
                 .addGap(197, 197, 197))
             .addGroup(panelRound1Layout.createSequentialGroup()
@@ -277,7 +292,7 @@ public class MainViewStudent extends javax.swing.JPanel {
                 .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(classMasterLabel))
-                .addContainerGap(203, Short.MAX_VALUE))
+                .addContainerGap(183, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout dashboardPanelLayout = new javax.swing.GroupLayout(dashboardPanel);
@@ -287,10 +302,10 @@ public class MainViewStudent extends javax.swing.JPanel {
             .addGroup(dashboardPanelLayout.createSequentialGroup()
                 .addGap(34, 34, 34)
                 .addGroup(dashboardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(panelRound1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(studentNameLabel)
-                    .addComponent(studentEmailLabel))
-                .addContainerGap(36, Short.MAX_VALUE))
+                    .addComponent(studentEmailLabel)
+                    .addComponent(panelRound1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(42, Short.MAX_VALUE))
         );
         dashboardPanelLayout.setVerticalGroup(
             dashboardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -301,7 +316,7 @@ public class MainViewStudent extends javax.swing.JPanel {
                 .addComponent(studentEmailLabel)
                 .addGap(26, 26, 26)
                 .addComponent(panelRound1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(81, Short.MAX_VALUE))
+                .addContainerGap(101, Short.MAX_VALUE))
         );
 
         mainViewCardLayout.add(dashboardPanel, "dashboardPanel");
@@ -346,6 +361,27 @@ public class MainViewStudent extends javax.swing.JPanel {
 
         mainViewCardLayout.add(schedulePanel, "schedulePanel");
 
+        absencesPanel.setBackground(new java.awt.Color(60, 73, 82));
+        absencesPanel.setForeground(new java.awt.Color(60, 73, 82));
+        absencesPanel.setToolTipText("");
+        absencesPanel.setRoundBottomLeft(25);
+        absencesPanel.setRoundBottomRight(25);
+        absencesPanel.setRoundTopLeft(25);
+        absencesPanel.setRoundTopRight(25);
+
+        javax.swing.GroupLayout absencesPanelLayout = new javax.swing.GroupLayout(absencesPanel);
+        absencesPanel.setLayout(absencesPanelLayout);
+        absencesPanelLayout.setHorizontalGroup(
+            absencesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 663, Short.MAX_VALUE)
+        );
+        absencesPanelLayout.setVerticalGroup(
+            absencesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 588, Short.MAX_VALUE)
+        );
+
+        mainViewCardLayout.add(absencesPanel, "absencesPanel");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -363,7 +399,9 @@ public class MainViewStudent extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(mainViewCardLayout, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(SideMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(SideMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(0, 0, 0)))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -389,6 +427,11 @@ public class MainViewStudent extends javax.swing.JPanel {
         showCard("gradesPanel");
     }//GEN-LAST:event_gradesLabelMouseClicked
 
+    private void absencesLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_absencesLabelMouseClicked
+        switchMenuLabel(absencesLabel);
+        showCard("absencesPanel");
+    }//GEN-LAST:event_absencesLabelMouseClicked
+
     private void setLabelColor(JLabel label, Color bg, Color fg) {
         label.setBackground(bg);
         label.setForeground(fg);
@@ -401,6 +444,8 @@ public class MainViewStudent extends javax.swing.JPanel {
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private Views.PanelRound SideMenu;
+    private javax.swing.JLabel absencesLabel;
+    private Views.PanelRound absencesPanel;
     private javax.swing.JLabel birthdateLabel;
     private javax.swing.JLabel classLabel;
     private javax.swing.JLabel classMasterLabel;
