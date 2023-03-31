@@ -1,72 +1,22 @@
 package Models;
 
+import java.util.Objects;
+
 public class Address implements Cloneable {
-    private String street, number, block, sc, city, county;
-    private int apartment, level;
-    
-    public Address() {
-       street = "";
-       number = "";
-       block = "";
-       sc = "";
-       city = "";
-       county = "";
-       apartment = 0;
-       level = 0;
-    }
-    
-    public Address(String street, String number, String block, String sc, int level, int apartment, String city, String county) {
-       this.street = street;
-       this.number = number;
-       this.block = block;
-       this.sc = sc;
-       this.city = city;
-       this.county = county;
-       this.apartment = apartment;
-       this.level = level;
-    }
-    
-    public Address(final Address adress) {
-       this.street = adress.street;
-       this.number = adress.number;
-       this.block = adress.block;
-       this.sc = adress.sc;
-       this.city = adress.city;
-       this.county = adress.county;
-       this.apartment = adress.apartment;
-       this.level = adress.level;
+    private String details, city, county;
+
+    public Address(String details, String city, String county) {
+        this.details = details;
+        this.city = city;
+        this.county = county;
     }
 
-    public String getStreet() {
-        return street;
+    public String getDetails() {
+        return details;
     }
 
-    public void setStreet(String street) {
-        this.street = street;
-    }
-
-    public String getNumber() {
-        return number;
-    }
-
-    public void setNumber(String number) {
-        this.number = number;
-    }
-
-    public String getBlock() {
-        return block;
-    }
-
-    public void setBlock(String block) {
-        this.block = block;
-    }
-
-    public String getSc() {
-        return sc;
-    }
-
-    public void setSc(String sc) {
-        this.sc = sc;
+    public void setDetails(String details) {
+        this.details = details;
     }
 
     public String getCity() {
@@ -85,30 +35,39 @@ public class Address implements Cloneable {
         this.county = county;
     }
 
-    public int getApartment() {
-        return apartment;
-    }
-
-    public void setApartment(int apartment) {
-        this.apartment = apartment;
-    }
-
-    public int getLevel() {
-        return level;
-    }
-
-    public void setLevel(int level) {
-        this.level = level;
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Address other = (Address) obj;
+        if (!Objects.equals(this.details, other.details)) {
+            return false;
+        }
+        if (!Objects.equals(this.city, other.city)) {
+            return false;
+        }
+        return Objects.equals(this.county, other.county);
     }
     
-    @Override
-    public Object clone() throws CloneNotSupportedException {
-        return super.clone();
-    }
-
     @Override
     public String toString() {
-        return street + ',' + number + ',' + sc + ',' + block + ',' + level + ',' + apartment + ',' + city + ',' + county;
+        return details + ',' + city + ',' + county;
     }
     
+    @Override
+    public Address clone() {
+        try {
+            Address clonedAddress = (Address) super.clone();
+            return clonedAddress;
+        }catch (CloneNotSupportedException e) {
+            throw new AssertionError();
+        }
+    }
 }

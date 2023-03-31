@@ -2,34 +2,37 @@ package Models;
 
 import java.util.Objects;
 
-public class User {
+public class User implements Cloneable {
+    private int userId;
     private String firstName;
     private String lastName;
     private String email;
-    private String phoneNumber;
-    private int userId;
-    private Address residence;
-    private Date birthDate;
-    private int roleId;
     private String password;
+    private String phoneNumber;
+    private Date birthDate;
+    private Address residence;
+    private char gender;
 
-    public User(String firstName, String lastName, String email, String phoneNumber, int userId, Address residence, Date birthDate, int roleId, String password) {
+    public User(int userId, String firstName, String lastName, String email, String password, String phoneNumber, int bDay, int bMonth, int bYear, String residenceDetails, String city, String county, char gender) {
+        this.userId = userId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
-        this.phoneNumber = phoneNumber;
-        this.userId = userId;
-        this.residence = residence;
-        this.roleId = roleId;
         this.password = password;
-        try {
-            this.birthDate = (Date) birthDate.clone();
-        } catch (CloneNotSupportedException ex) {
-            System.out.println("Unable to copy user birthdate");
-            ex.printStackTrace();
-        }
+        this.phoneNumber = phoneNumber;
+        this.birthDate = new Date(bYear, bMonth, bDay);
+        this.residence = new Address(residenceDetails, city, county);
+        this.gender = gender;
     }
-    
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
     public String getFirstName() {
         return firstName;
     }
@@ -54,28 +57,20 @@ public class User {
         this.email = email;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     public String getPhoneNumber() {
         return phoneNumber;
     }
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
-    }
-
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
-
-    public Address getResidence() {
-        return residence;
-    }
-
-    public void setResidence(Address residence) throws CloneNotSupportedException {
-        this.residence = (Address) residence.clone();
     }
 
     public Date getBirthDate() {
@@ -86,26 +81,27 @@ public class User {
         this.birthDate = birthDate;
     }
 
-    public int getRoleId() {
-        return roleId;
+    public Address getResidence() {
+        return residence;
     }
 
-    public void setRoleId(int roleId) {
-        this.roleId = roleId;
+    public void setResidence(Address residence) {
+        this.residence = residence;
     }
 
-    public String getPassword() {
-        return password;
+    public char getGender() {
+        return gender;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setGender(char gender) {
+        this.gender = gender;
     }
 
-    @Override
-    public int hashCode() {
-        return this.userId;
-    }
+//    @Override
+//    public int hashCode() {
+//        int hash = 7;
+//        return hash;
+//    }
 
     @Override
     public boolean equals(Object obj) {
@@ -122,7 +118,7 @@ public class User {
         if (this.userId != other.userId) {
             return false;
         }
-        if (this.roleId != other.roleId) {
+        if (this.gender != other.gender) {
             return false;
         }
         if (!Objects.equals(this.firstName, other.firstName)) {
@@ -134,18 +130,26 @@ public class User {
         if (!Objects.equals(this.email, other.email)) {
             return false;
         }
-        if (!Objects.equals(this.phoneNumber, other.phoneNumber)) {
-            return false;
-        }
         if (!Objects.equals(this.password, other.password)) {
             return false;
         }
-        if (!Objects.equals(this.residence, other.residence)) {
+        if (!Objects.equals(this.phoneNumber, other.phoneNumber)) {
             return false;
         }
-        return Objects.equals(this.birthDate, other.birthDate);
+        if (!Objects.equals(this.birthDate, other.birthDate)) {
+            return false;
+        }
+        return Objects.equals(this.residence, other.residence);
     }
-
-
-    
+    @Override
+    public User clone() {
+        try {
+            User clonedUser = (User) super.clone();
+            clonedUser.residence = (Address) this.residence.clone();
+            clonedUser.birthDate = (Date) this.birthDate.clone();
+            return clonedUser;
+        } catch (CloneNotSupportedException e) {
+            throw new AssertionError();
+        }
+    }
 }
