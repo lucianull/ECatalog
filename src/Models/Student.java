@@ -2,9 +2,7 @@
 package Models;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Objects;
-import java.util.Optional;
 
 public class Student extends User {
 
@@ -14,9 +12,10 @@ public class Student extends User {
     private String parentLastName;
     private String parentPhoneNumber;
     private String parentEmail;
-    private Optional < Collection < Grade > > grades;
+    private ArrayList < Grade > grades;
+    private Class studentClass = null;
 
-    public Student(int classId, String matriculationNr, String parentFirstName, String parentLastName, String parentPhoneNumber, String parentEmail, int userId, String firstName, String lastName, String email, String password, String phoneNumber, int bDay, int bMonth, int bYear, String residenceDetails, String city, String county, char gender) {
+    public Student(int classId, String matriculationNr, String parentFirstName, String parentLastName, String parentPhoneNumber, String parentEmail, int userId, String firstName, String lastName, String email, String password, String phoneNumber, int bDay, int bMonth, int bYear, String residenceDetails, String city, String county, String gender) {
         super(userId, firstName, lastName, email, password, phoneNumber, bDay, bMonth, bYear, residenceDetails, city, county, gender);
         this.classId = classId;
         this.matriculationNr = matriculationNr;
@@ -74,12 +73,20 @@ public class Student extends User {
         this.parentEmail = parentEmail;
     }
 
-    public Optional<Collection<Grade>> getGrades() {
+    public ArrayList<Grade> getGrades() {
         return grades;
     }
 
-    public void setGrades(Optional<Collection<Grade>> grades) {
+    public void setGrades(ArrayList<Grade> grades) {
         this.grades = grades;
+    }
+
+    public Class getStudentClass() {
+        return studentClass;
+    }
+
+    public void setStudentClass(Class studentClass) {
+        this.studentClass = studentClass;
     }
     
     @Override

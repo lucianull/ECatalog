@@ -3,6 +3,9 @@ import Controllers.UsersController;
 import Models.Student;
 import java.awt.CardLayout;
 import java.awt.Color;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
@@ -39,8 +42,16 @@ public class MainViewStudent extends javax.swing.JPanel {
         matriculationNrLabel.setText(((Student)userController.getUser()).getMatriculationNr());
         birthdateLabel.setText(userController.getUser().getBirthDate().toString());
         residenceLabel.setText(userController.getUser().getResidence().toString());
-        classLabel.setText(String.valueOf(((Student)userController.getUser()).getClassId()));
-        classMasterLabel.setText("");
+        try {
+            classLabel.setText(userController.getStudentClass().getName());
+        } catch (SQLException ex) {
+            Logger.getLogger(MainViewStudent.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            classMasterLabel.setText(userController.getStudentClassProfessor().getFirstName() + ' ' + userController.getStudentClassProfessor().getLastName());
+        } catch (SQLException ex) {
+            Logger.getLogger(MainViewStudent.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
     }
 

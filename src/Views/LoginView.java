@@ -2,6 +2,9 @@
 package Views;
 
 import Controllers.UsersController;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class LoginView extends javax.swing.JPanel {
 
@@ -272,13 +275,17 @@ public class LoginView extends javax.swing.JPanel {
     }//GEN-LAST:event_passwordTextboxActionPerformed
 
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
-        if(userController.CheckAccount(emailTextbox.getText(), passwordTextbox.getText()) == true){
-            App.getInstance().setMainViewStudent(new MainViewStudent(userController));
-            App.getInstance().showCard("mainViewStudent");
-        }
-        else
-        {
-            wrongAccountLabel.setText("Adresa de email sau parola nu sunt corecte.");
+        try {
+            if(userController.CheckUser(emailTextbox.getText(), passwordTextbox.getText()) == true){
+                App.getInstance().setMainViewStudent(new MainViewStudent(userController));
+                App.getInstance().showCard("mainViewStudent");
+            }
+            else
+            {
+                wrongAccountLabel.setText("Adresa de email sau parola nu sunt corecte.");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(LoginView.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_loginButtonActionPerformed
 

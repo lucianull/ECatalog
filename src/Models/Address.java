@@ -3,7 +3,9 @@ package Models;
 import java.util.Objects;
 
 public class Address implements Cloneable {
-    private String details, city, county;
+    private String details;
+    private String city;
+    private String county;
 
     public Address(String details, String city, String county) {
         this.details = details;
@@ -58,7 +60,7 @@ public class Address implements Cloneable {
     
     @Override
     public String toString() {
-        return details + ',' + city + ',' + county;
+        return details + ", " + city + ", " + county;
     }
     
     @Override

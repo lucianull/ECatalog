@@ -38,7 +38,7 @@ CREATE TABLE Students (
   parentFirstName VARCHAR(50) NOT NULL,
   parentLastName VARCHAR(50) NOT NULL,
   parentPhoneNumber VARCHAR(20),
-  parentEmail VARCHAR(255),
+  parentEmail VARCHAR(50),
   PRIMARY KEY (userId),
   FOREIGN KEY (userId) REFERENCES Users(userId),
   FOREIGN KEY (classId) REFERENCES Classes(classId)

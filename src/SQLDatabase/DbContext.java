@@ -25,10 +25,10 @@ public class DbContext {
         return instance;
     }
 
-    public void connect(String url, String username, String password, String schema) {
+    public void connect(String url, String username, String password) {
         try {
             // Connect to the MySQL database using the provided URL, username, and password
-            context = DriverManager.getConnection(url + "/" + schema, username, password);
+            context = DriverManager.getConnection(url, username, password);
             System.out.println("Connected to database");
         } catch (SQLException e) {
             System.err.println("Error: Unable to connect to database");

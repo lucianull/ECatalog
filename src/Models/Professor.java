@@ -6,7 +6,7 @@ public class Professor extends User{
 
     private Date hireDate;
 
-    public Professor(int userId, String firstName, String lastName, String email, String password, String phoneNumber, int bDay, int bMonth, int bYear, String residenceDetails, String city, String county, char gender, int hDay, int hMonth, int hYear) {
+    public Professor(int userId, String firstName, String lastName, String email, String password, String phoneNumber, int bDay, int bMonth, int bYear, String residenceDetails, String city, String county, String gender, int hDay, int hMonth, int hYear) {
         super(userId, firstName, lastName, email, password, phoneNumber, bDay, bMonth, bYear, residenceDetails, city, county, gender);
         hireDate = new Date(hYear, hMonth, hDay);
     }

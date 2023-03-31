@@ -1,6 +1,7 @@
 package Views;
 
 import Controllers.UsersController;
+import SQLDatabase.DbContext;
 import java.awt.CardLayout;
 
 public class App extends javax.swing.JFrame {
@@ -9,12 +10,17 @@ public class App extends javax.swing.JFrame {
     private CardLayout cardLayout;
     private UsersController userController;
     private MainViewStudent mainViewStudent = null;
+    static String databaseUrl = "jdbc:mysql://localhost:3307/netbeansapp";
+    static String databaseUsername = "root";
+    static String databasePassword = "123456";
+    
 
     private App() {
         userController = new UsersController();
         initComponents();
         cardLayout = (CardLayout) cards.getLayout();
         getContentPane().add(cards);
+        DbContext.getInstance().connect(databaseUrl, databaseUsername, databasePassword);
     }
 
     public static App getInstance() {

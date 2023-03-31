@@ -8,6 +8,7 @@ public class Class implements Cloneable{
     private int classId;
     private String name;
     private int classMasterId;
+    private Professor classMaster = null;
 
     public Class(int classId, String name, int classMasterId) {
         this.classId = classId;
@@ -39,6 +40,14 @@ public class Class implements Cloneable{
         this.classMasterId = classMasterId;
     }
 
+    public Professor getClassMaster() {
+        return classMaster;
+    }
+
+    public void setClassMaster(Professor classMaster) {
+        this.classMaster = classMaster;
+    }
+    
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {

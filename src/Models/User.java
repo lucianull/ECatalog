@@ -11,9 +11,9 @@ public class User implements Cloneable {
     private String phoneNumber;
     private Date birthDate;
     private Address residence;
-    private char gender;
+    private String gender;
 
-    public User(int userId, String firstName, String lastName, String email, String password, String phoneNumber, int bDay, int bMonth, int bYear, String residenceDetails, String city, String county, char gender) {
+    public User(int userId, String firstName, String lastName, String email, String password, String phoneNumber, int bDay, int bMonth, int bYear, String residenceDetails, String city, String county, String gender) {
         this.userId = userId;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -89,19 +89,13 @@ public class User implements Cloneable {
         this.residence = residence;
     }
 
-    public char getGender() {
+    public String getGender() {
         return gender;
     }
 
-    public void setGender(char gender) {
+    public void setGender(String gender) {
         this.gender = gender;
     }
-
-//    @Override
-//    public int hashCode() {
-//        int hash = 7;
-//        return hash;
-//    }
 
     @Override
     public boolean equals(Object obj) {
@@ -116,9 +110,6 @@ public class User implements Cloneable {
         }
         final User other = (User) obj;
         if (this.userId != other.userId) {
-            return false;
-        }
-        if (this.gender != other.gender) {
             return false;
         }
         if (!Objects.equals(this.firstName, other.firstName)) {
@@ -136,11 +127,15 @@ public class User implements Cloneable {
         if (!Objects.equals(this.phoneNumber, other.phoneNumber)) {
             return false;
         }
+        if (!Objects.equals(this.gender, other.gender)) {
+            return false;
+        }
         if (!Objects.equals(this.birthDate, other.birthDate)) {
             return false;
         }
         return Objects.equals(this.residence, other.residence);
     }
+
     @Override
     public User clone() {
         try {
