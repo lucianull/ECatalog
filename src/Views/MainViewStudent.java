@@ -1,25 +1,38 @@
 package Views;
+import Controllers.StudentsController;
 import Controllers.UsersController;
 import Models.Student;
 import java.awt.CardLayout;
 import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Font;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.BorderFactory;
+import javax.swing.JComponent;
 import javax.swing.JLabel;
+import javax.swing.JTable;
+import javax.swing.JViewport;
 import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
+import javax.swing.table.TableColumn;
+import javax.swing.table.TableColumnModel;
 
 
 public class MainViewStudent extends javax.swing.JPanel {
     
     private Color background;
     private Color foreground;
-    
     private Color lightBackground;
     private Color activeForeground;
     private JLabel lastSwitched = null;
     private CardLayout cardLayout;
-    private UsersController userController;
+    private StudentsController studentController;
     
     public MainViewStudent(UsersController userController) {
         background = new Color(43, 56, 65);
@@ -27,28 +40,28 @@ public class MainViewStudent extends javax.swing.JPanel {
         lightBackground = new Color(60,73,82);
         activeForeground = new Color(77,133,114);
         initComponents();
-        this.userController = userController;
+        this.studentController = new StudentsController(userController.getCurrentUser());
         lastSwitched = dashboardLabel;
         setLabelColor(dashboardLabel, background, activeForeground);
         cardLayout = (CardLayout) mainViewCardLayout.getLayout();
         cardLayout.show(mainViewCardLayout, "dashboardPanel");
-        setDashboard();
+        setStudentDashboard();
         
     }
     
-    private void setDashboard() {
-        studentNameLabel.setText(userController.getFullName());
-        studentEmailLabel.setText(userController.getEmail());
-        matriculationNrLabel.setText(((Student)userController.getUser()).getMatriculationNr());
-        birthdateLabel.setText(userController.getUser().getBirthDate().toString());
-        residenceLabel.setText(userController.getUser().getResidence().toString());
+    private void setStudentDashboard() {
+        studentNameLabel.setText(studentController.getFullName());
+        studentEmailLabel.setText(studentController.getEmail());
+        matriculationNrLabel.setText(((Student)studentController.getUser()).getMatriculationNr());
+        birthdateLabel.setText(studentController.getUser().getBirthDate().toString());
+        residenceLabel.setText(studentController.getUser().getResidence().toString());
         try {
-            classLabel.setText(userController.getStudentClass().getName());
+            classLabel.setText(studentController.getStudentClass().getName());
         } catch (SQLException ex) {
             Logger.getLogger(MainViewStudent.class.getName()).log(Level.SEVERE, null, ex);
         }
         try {
-            classMasterLabel.setText(userController.getStudentClassProfessor().getFirstName() + ' ' + userController.getStudentClassProfessor().getLastName());
+            classMasterLabel.setText(studentController.getStudentClassProfessor().getFirstName() + ' ' + studentController.getStudentClassProfessor().getLastName());
         } catch (SQLException ex) {
             Logger.getLogger(MainViewStudent.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -84,6 +97,11 @@ public class MainViewStudent extends javax.swing.JPanel {
         gradesPanel = new Views.PanelRound();
         schedulePanel = new Views.PanelRound();
         absencesPanel = new Views.PanelRound();
+        absencesScrollPanel = new javax.swing.JScrollPane();
+        absencesTable = new javax.swing.JTable();
+        semesterLabel = new javax.swing.JLabel();
+        semesterOption = new javax.swing.JComboBox<>();
+        absencesTitle = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(43, 56, 65));
         setPreferredSize(new java.awt.Dimension(900, 600));
@@ -369,41 +387,144 @@ public class MainViewStudent extends javax.swing.JPanel {
         absencesPanel.setRoundTopLeft(25);
         absencesPanel.setRoundTopRight(25);
 
-        javax.swing.GroupLayout absencesPanelLayout = new javax.swing.GroupLayout(absencesPanel);
-        absencesPanel.setLayout(absencesPanelLayout);
-        absencesPanelLayout.setHorizontalGroup(
-            absencesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 663, Short.MAX_VALUE)
-        );
-        absencesPanelLayout.setVerticalGroup(
-            absencesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 588, Short.MAX_VALUE)
-        );
+        absencesScrollPanel.setBackground(lightBackground);
 
-        mainViewCardLayout.add(absencesPanel, "absencesPanel");
+        absencesTable.setBackground(lightBackground);
+        absencesTable.setFont(new java.awt.Font("Segoe UI", Font.PLAIN, 18));
+        absencesTable.setForeground(new java.awt.Color(191, 205, 214));
+        absencesTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(SideMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            },
+            new String [] {
+                "Materie", "Data"
+            }
+        ) {
+            @Override
+            public Class<?> getColumnClass(int columnIndex) {
+                return String.class;
+            }
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        }
+    );
+    absencesTable.setToolTipText("");
+    absencesTable.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+    absencesTable.setEnabled(false);
+    absencesTable.setFocusable(false);
+    absencesTable.setGridColor(background);
+    absencesTable.setRowHeight(30);
+    absencesTable.setRowSelectionAllowed(false);
+    absencesTable.setSelectionBackground(new java.awt.Color(60, 73, 82));
+    absencesScrollPanel.setViewportView(absencesTable);
+    absencesTable.getTableHeader().setFont(new Font("Segoe UI", Font.PLAIN, 18));
+    absencesTable.getTableHeader().setForeground(foreground);
+    absencesTable.getTableHeader().setBackground(lightBackground);
+    absencesTable.getTableHeader().setBorder(BorderFactory.createMatteBorder(0, 0, 2, 0, background));
+    absencesTable.setBorder(BorderFactory.createLineBorder(background));
+    absencesTable.getTableHeader().setOpaque(true);
+    absencesTable.getTableHeader().setResizingAllowed(false);
+    absencesTable.getTableHeader().setReorderingAllowed(false);
+    absencesTable.getTableHeader().setDefaultRenderer(new DefaultTableCellRenderer() {
+        {
+            setHorizontalAlignment(JLabel.CENTER);
+            setVerticalAlignment(JLabel.CENTER);
+            setOpaque(true);
+            setBackground(lightBackground);
+            setBorder(BorderFactory.createMatteBorder(0, 0, 5, 2, background)); // set bottom and right border to background color
+            setForeground(foreground);
+        }
+        @Override
+        public Component getTableCellRendererComponent(JTable table, Object value,
+            boolean isSelected, boolean hasFocus, int row, int column) {
+            JComponent c = (JComponent) super.getTableCellRendererComponent(table, value,
+                isSelected, hasFocus, row, column);
+            c.setBorder(BorderFactory.createLineBorder(background));
+            return c;
+        }
+    });
+    absencesTable.getTableHeader().setPreferredSize(new Dimension(absencesTable.getTableHeader().getWidth(), 40));
+
+    semesterLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+    semesterLabel.setForeground(new java.awt.Color(191, 205, 214));
+    semesterLabel.setText("Semestru:");
+
+    semesterOption.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+    semesterOption.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "I", "II" }));
+    semesterOption.setSelectedIndex(-1);
+    semesterOption.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            semesterOptionActionPerformed(evt);
+        }
+    });
+
+    absencesTitle.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+    absencesTitle.setForeground(new java.awt.Color(191, 205, 214));
+    absencesTitle.setText("Absente");
+
+    javax.swing.GroupLayout absencesPanelLayout = new javax.swing.GroupLayout(absencesPanel);
+    absencesPanel.setLayout(absencesPanelLayout);
+    absencesPanelLayout.setHorizontalGroup(
+        absencesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGroup(absencesPanelLayout.createSequentialGroup()
+            .addGroup(absencesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(absencesPanelLayout.createSequentialGroup()
+                    .addGap(261, 261, 261)
+                    .addComponent(semesterLabel)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(semesterOption, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(absencesPanelLayout.createSequentialGroup()
+                    .addGap(283, 283, 283)
+                    .addComponent(absencesTitle))
+                .addGroup(absencesPanelLayout.createSequentialGroup()
+                    .addGap(50, 50, 50)
+                    .addComponent(absencesScrollPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 563, javax.swing.GroupLayout.PREFERRED_SIZE)))
+            .addContainerGap(50, Short.MAX_VALUE))
+    );
+    absencesPanelLayout.setVerticalGroup(
+        absencesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, absencesPanelLayout.createSequentialGroup()
+            .addGap(37, 37, 37)
+            .addComponent(absencesTitle)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
+            .addGroup(absencesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(semesterLabel)
+                .addComponent(semesterOption, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGap(62, 62, 62)
+            .addComponent(absencesScrollPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGap(39, 39, 39))
+    );
+
+    JViewport viewport = absencesScrollPanel.getViewport();
+    viewport.setBackground(lightBackground);
+    absencesScrollPanel.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, background));
+
+    mainViewCardLayout.add(absencesPanel, "absencesPanel");
+
+    javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+    this.setLayout(layout);
+    layout.setHorizontalGroup(
+        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGroup(layout.createSequentialGroup()
+            .addContainerGap()
+            .addComponent(SideMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(mainViewCardLayout, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addContainerGap())
+    );
+    layout.setVerticalGroup(
+        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGroup(layout.createSequentialGroup()
+            .addContainerGap()
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(mainViewCardLayout, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(mainViewCardLayout, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(SideMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(0, 0, 0)))
-                .addContainerGap())
-        );
+                .addGroup(layout.createSequentialGroup()
+                    .addComponent(SideMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGap(0, 0, 0)))
+            .addContainerGap())
+    );
     }// </editor-fold>//GEN-END:initComponents
 
     private void switchMenuLabel(JLabel label) {
@@ -432,6 +553,20 @@ public class MainViewStudent extends javax.swing.JPanel {
         showCard("absencesPanel");
     }//GEN-LAST:event_absencesLabelMouseClicked
 
+    private void semesterOptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_semesterOptionActionPerformed
+        String selectedOption = (String) semesterOption.getSelectedItem();
+        try {
+            ArrayList< String[]> absences = studentController.getAbsences(selectedOption);
+            DefaultTableModel model = (DefaultTableModel) absencesTable.getModel();
+            model.setRowCount(0);
+            for(String[] row : absences) {
+                model.addRow(row);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MainViewStudent.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_semesterOptionActionPerformed
+
     private void setLabelColor(JLabel label, Color bg, Color fg) {
         label.setBackground(bg);
         label.setForeground(fg);
@@ -446,6 +581,9 @@ public class MainViewStudent extends javax.swing.JPanel {
     private Views.PanelRound SideMenu;
     private javax.swing.JLabel absencesLabel;
     private Views.PanelRound absencesPanel;
+    private javax.swing.JScrollPane absencesScrollPanel;
+    private javax.swing.JTable absencesTable;
+    private javax.swing.JLabel absencesTitle;
     private javax.swing.JLabel birthdateLabel;
     private javax.swing.JLabel classLabel;
     private javax.swing.JLabel classMasterLabel;
@@ -465,6 +603,8 @@ public class MainViewStudent extends javax.swing.JPanel {
     private javax.swing.JLabel residenceLabel;
     private javax.swing.JLabel scheduleLabel;
     private Views.PanelRound schedulePanel;
+    private javax.swing.JLabel semesterLabel;
+    private javax.swing.JComboBox<String> semesterOption;
     private javax.swing.JLabel studentEmailLabel;
     private javax.swing.JLabel studentNameLabel;
     private javax.swing.JLabel titleLabel;

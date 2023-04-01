@@ -7,12 +7,14 @@ public class Absence implements Cloneable{
     private int studentId;
     private int subjectId;
     private Date absenceDate;
+    private byte semester;
 
-    public Absence(int absenceId, int studentId, int subjectId, int day, int month, int year) {
+    public Absence(int absenceId, int studentId, int subjectId, int day, int month, int year, byte semester) {
         this.absenceId = absenceId;
         this.studentId = studentId;
         this.subjectId = subjectId;
         this.absenceDate = new Date(year, month, day);
+        this.semester = semester;
     }
 
     public int getAbsenceId() {
@@ -47,6 +49,14 @@ public class Absence implements Cloneable{
         this.absenceDate = absenceDate;
     }
 
+    public byte getSemester() {
+        return semester;
+    }
+
+    public void setSemester(byte semester) {
+        this.semester = semester;
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -68,8 +78,14 @@ public class Absence implements Cloneable{
         if (this.subjectId != other.subjectId) {
             return false;
         }
+        if (this.semester != other.semester) {
+            return false;
+        }
         return Objects.equals(this.absenceDate, other.absenceDate);
     }
+
+    
+    
     public Absence clone() {
         try {
             Absence clonedAbsence = (Absence) super.clone();

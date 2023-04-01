@@ -97,6 +97,8 @@ public class User implements Cloneable {
         this.gender = gender;
     }
 
+    
+    
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {

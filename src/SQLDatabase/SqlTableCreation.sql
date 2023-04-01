@@ -90,6 +90,7 @@ CREATE TABLE StudentAbsences (
   studentId INT NOT NULL,
   subjectId INT NOT NULL,
   absence_date DATE NOT NULL,
+  semester BIT(1) NOT NULL,
   PRIMARY KEY (id),
   FOREIGN KEY (studentId) REFERENCES Users(userId),
   FOREIGN KEY (subjectId) REFERENCES Subjects(subjectId)
@@ -211,17 +212,17 @@ VALUES
   (5, 3, 9.3, '2022-03-30', b'1', b'1');
 
 -- Inserts for StudentAbsences table
-INSERT INTO StudentAbsences (studentId, subjectId, absence_date)
+INSERT INTO StudentAbsences (studentId, subjectId, absence_date, semester)
 VALUES 
-(1, 2, '2022-01-10'),
-(1, 4, '2022-02-22'),
-(2, 1, '2022-01-15'),
-(2, 3, '2022-03-01'),
-(3, 2, '2022-02-10'),
-(3, 5, '2022-03-10'),
-(4, 1, '2022-02-15'),
-(4, 3, '2022-03-08'),
-(5, 4, '2022-02-28'),
-(5, 5, '2022-03-15');
+(1, 2, '2022-01-10', b'0'),
+(1, 4, '2022-02-22', b'0'),
+(2, 1, '2022-01-15', b'0'),
+(2, 3, '2022-03-01', b'0'),
+(3, 2, '2022-02-10', b'0'),
+(3, 5, '2022-03-10', b'0'),
+(4, 1, '2022-02-15', b'0'),
+(4, 3, '2022-03-08', b'1'),
+(5, 4, '2022-02-28', b'1'),
+(5, 5, '2022-03-15', b'1');
 
 DROP TABLE IF EXISTS StudentAbsences, Grades, Courses, ProfessorSubjects, Subjects, Students, Classes, Professors, Users;

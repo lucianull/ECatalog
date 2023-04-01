@@ -12,7 +12,8 @@ public class Student extends User {
     private String parentLastName;
     private String parentPhoneNumber;
     private String parentEmail;
-    private ArrayList < Grade > grades;
+    private ArrayList < Grade > grades = null;
+    private ArrayList < Absence> absences = null;
     private Class studentClass = null;
 
     public Student(int classId, String matriculationNr, String parentFirstName, String parentLastName, String parentPhoneNumber, String parentEmail, int userId, String firstName, String lastName, String email, String password, String phoneNumber, int bDay, int bMonth, int bYear, String residenceDetails, String city, String county, String gender) {
@@ -87,6 +88,14 @@ public class Student extends User {
 
     public void setStudentClass(Class studentClass) {
         this.studentClass = studentClass;
+    }
+
+    public ArrayList<Absence> getAbsences() {
+        return absences;
+    }
+
+    public void setAbsences(ArrayList<Absence> absences) {
+        this.absences = absences;
     }
     
     @Override

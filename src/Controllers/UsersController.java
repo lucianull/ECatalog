@@ -17,6 +17,15 @@ public class UsersController {
     public UsersController() {
         dbContext = DbContext.getInstance();
     }
+
+    public User getCurrentUser() {
+        return currentUser;
+    }
+
+    public void setCurrentUser(User currentUser) {
+        this.currentUser = currentUser;
+    }
+    
     public boolean CheckUser(String email, String password) throws SQLException {
         String sql = "SELECT * FROM users WHERE email = ? AND password = ?";
         PreparedStatement statement = dbContext.getConnection().prepareStatement(sql);
@@ -64,64 +73,5 @@ public class UsersController {
             }
         }
         return false;
-    }
-    public String getFullName() {
-        return currentUser.getLastName() + ' ' + currentUser.getFirstName();
-    }
-    public String getEmail() {
-        return currentUser.getEmail();
-    }
-    public User getUser() {
-        return currentUser;
-    }
-    
-    public Class getStudentClass() throws SQLException {
-        Student student = (Student) currentUser;
-        Class studentClass = student.getStudentClass();
-        if(studentClass == null) {
-            String sql = "SELECT * FROM classes WHERE classId = ?";
-            PreparedStatement statement = dbContext.getConnection().prepareStatement(sql);
-            statement.setInt(1, student.getClassId());
-            ResultSet result = statement.executeQuery();
-            if(result.next()) {
-                studentClass = new Class(result.getInt("classId"), result.getString("name"), result.getInt("classMasterId"));
-                student.setStudentClass(studentClass);
-            }
-            else{
-                throw new NullPointerException("Class doesn't exist in database");
-            }
-        }
-        return studentClass;
-    }
-    public Professor getStudentClassProfessor() throws SQLException{
-        Student student = (Student) currentUser;
-        if(this.getStudentClass().getClassMaster()== null) {
-                String sql = "SELECT * FROM users INNER JOIN professors ON users.userId = professors.userId WHERE users.userId = ?";
-                PreparedStatement statement = dbContext.getConnection().prepareStatement(sql);
-                statement = dbContext.getConnection().prepareStatement(sql);
-                statement.setInt(1, this.getStudentClass().getClassMasterId());
-                ResultSet result = statement.executeQuery();
-                if(result.next()) {
-                    Date birthdate = result.getDate("birthDate");
-                    Calendar calendar = Calendar.getInstance();
-                    calendar.setTime(birthdate);
-                    int bDay = calendar.get(Calendar.DAY_OF_MONTH);
-                    int bMonth = calendar.get(Calendar.MONTH);
-                    int bYear = calendar.get(Calendar.YEAR);
-                    Date hireDate = result.getDate("hireDate");
-                    calendar.setTime(hireDate);
-                    student.getStudentClass().setClassMaster(new Professor(result.getInt("userId"), result.getString("firstName"), 
-                                                            result.getString("lastName"), result.getString("email"), result.getString("password"),
-                                                            result.getString("phoneNumber"), bDay, bMonth, bYear, result.getString("addressDetails"), 
-                                                            result.getString("city"), result.getString("county"),
-                                                            result.getString("gender"), calendar.get(Calendar.DAY_OF_MONTH),
-                                                            calendar.get(Calendar.MONTH), calendar.get(Calendar.YEAR)));
-                }
-                else {
-                    throw new NullPointerException("Professor doesn't exist in database");
-                }
-                
-            }
-        return student.getStudentClass().getClassMaster();
     }
 }
