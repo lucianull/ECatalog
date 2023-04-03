@@ -96,6 +96,14 @@ CREATE TABLE StudentAbsences (
   FOREIGN KEY (subjectId) REFERENCES Subjects(subjectId)
 );
 
+CREATE TABLE ClassCourses (
+  classId INT NOT NULL,
+  courseId INT NOT NULL,
+  PRIMARY KEY (classId, courseId),
+  FOREIGN KEY (classId) REFERENCES Classes(classId),
+  FOREIGN KEY (courseId) REFERENCES Courses(courseId)
+);
+
 -- Inserts for Users table
 INSERT INTO Users (firstName, lastName, email, password, phoneNumber, birthdate, gender, addressDetails, city, county)
 VALUES ('Alexandru', 'Popescu', 'alexandru.popescu@example.com', 'parola123', '+40723123456', '1994-06-23', 'M', 'Str. Zorilor nr. 5', 'Cluj-Napoca', 'Cluj');
@@ -224,5 +232,13 @@ VALUES
 (4, 3, '2022-03-08', b'1'),
 (5, 4, '2022-02-28', b'1'),
 (5, 5, '2022-03-15', b'1');
+
+-- Inserts for ClassCourses table
+INSERT INTO ClassCourses (classId, courseId) VALUES
+(1, 1),
+(2, 2),
+(3, 3),
+(4, 4),
+(5, 5);
 
 DROP TABLE IF EXISTS StudentAbsences, Grades, Courses, ProfessorSubjects, Subjects, Students, Classes, Professors, Users;

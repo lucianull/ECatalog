@@ -1,5 +1,6 @@
 package Models;
 
+import java.util.ArrayList;
 import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -9,6 +10,7 @@ public class Class implements Cloneable{
     private String name;
     private int classMasterId;
     private Professor classMaster = null;
+    ArrayList < Course > courses = null;
 
     public Class(int classId, String name, int classMasterId) {
         this.classId = classId;
@@ -46,6 +48,14 @@ public class Class implements Cloneable{
 
     public void setClassMaster(Professor classMaster) {
         this.classMaster = classMaster;
+    }
+
+    public ArrayList< Course > getCourses() {
+        return courses;
+    }
+
+    public void setCourses(ArrayList < Course > courses) {
+        this.courses = courses;
     }
     
     @Override

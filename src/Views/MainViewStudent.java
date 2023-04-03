@@ -1,12 +1,15 @@
 package Views;
+
 import Controllers.StudentsController;
 import Controllers.UsersController;
+import Misc.Pair;
 import Models.Student;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.GridLayout;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -14,31 +17,28 @@ import java.util.logging.Logger;
 import javax.swing.BorderFactory;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JViewport;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.JTableHeader;
-import javax.swing.table.TableColumn;
-import javax.swing.table.TableColumnModel;
-
 
 public class MainViewStudent extends javax.swing.JPanel {
-    
-    private Color background;
-    private Color foreground;
-    private Color lightBackground;
-    private Color activeForeground;
+
+    private final Color background;
+    private final Color foreground;
+    private final Color lightBackground;
+    private final Color activeForeground;
     private JLabel lastSwitched = null;
     private CardLayout cardLayout;
     private StudentsController studentController;
-    
+
     public MainViewStudent(UsersController userController) {
         background = new Color(43, 56, 65);
         foreground = new Color(191, 205, 214);
-        lightBackground = new Color(60,73,82);
-        activeForeground = new Color(77,133,114);
+        lightBackground = new Color(60, 73, 82);
+        activeForeground = new Color(77, 133, 114);
         initComponents();
         this.studentController = new StudentsController(userController.getCurrentUser());
         lastSwitched = dashboardLabel;
@@ -46,13 +46,13 @@ public class MainViewStudent extends javax.swing.JPanel {
         cardLayout = (CardLayout) mainViewCardLayout.getLayout();
         cardLayout.show(mainViewCardLayout, "dashboardPanel");
         setStudentDashboard();
-        
+
     }
-    
+
     private void setStudentDashboard() {
         studentNameLabel.setText(studentController.getFullName());
         studentEmailLabel.setText(studentController.getEmail());
-        matriculationNrLabel.setText(((Student)studentController.getUser()).getMatriculationNr());
+        matriculationNrLabel.setText(((Student) studentController.getUser()).getMatriculationNr());
         birthdateLabel.setText(studentController.getUser().getBirthDate().toString());
         residenceLabel.setText(studentController.getUser().getResidence().toString());
         try {
@@ -65,7 +65,6 @@ public class MainViewStudent extends javax.swing.JPanel {
         } catch (SQLException ex) {
             Logger.getLogger(MainViewStudent.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
     }
 
     @SuppressWarnings("unchecked")
@@ -96,6 +95,23 @@ public class MainViewStudent extends javax.swing.JPanel {
         classMasterLabel = new javax.swing.JLabel();
         gradesPanel = new Views.PanelRound();
         schedulePanel = new Views.PanelRound();
+        scheduleTitleLabel = new javax.swing.JLabel();
+        panelRound2 = new Views.PanelRound();
+        mondayPanel = new javax.swing.JPanel();
+        tuesdayPanel = new javax.swing.JPanel();
+        wednesdayPanel = new javax.swing.JPanel();
+        thursdayPanel = new javax.swing.JPanel();
+        fridayPanel = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        mondayStartTime = new javax.swing.JLabel();
+        tuesdayStartTime = new javax.swing.JLabel();
+        wednesdayStartTime = new javax.swing.JLabel();
+        thursdayStartTime = new javax.swing.JLabel();
+        fridayStartTime = new javax.swing.JLabel();
         absencesPanel = new Views.PanelRound();
         absencesScrollPanel = new javax.swing.JScrollPane();
         absencesTable = new javax.swing.JTable();
@@ -257,7 +273,7 @@ public class MainViewStudent extends javax.swing.JPanel {
         panelRound1Layout.setHorizontalGroup(
             panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound1Layout.createSequentialGroup()
-                .addContainerGap(204, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel4)
                 .addGap(197, 197, 197))
             .addGroup(panelRound1Layout.createSequentialGroup()
@@ -310,7 +326,7 @@ public class MainViewStudent extends javax.swing.JPanel {
                 .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(classMasterLabel))
-                .addContainerGap(183, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout dashboardPanelLayout = new javax.swing.GroupLayout(dashboardPanel);
@@ -323,7 +339,7 @@ public class MainViewStudent extends javax.swing.JPanel {
                     .addComponent(studentNameLabel)
                     .addComponent(studentEmailLabel)
                     .addComponent(panelRound1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(42, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         dashboardPanelLayout.setVerticalGroup(
             dashboardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -334,7 +350,7 @@ public class MainViewStudent extends javax.swing.JPanel {
                 .addComponent(studentEmailLabel)
                 .addGap(26, 26, 26)
                 .addComponent(panelRound1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(101, Short.MAX_VALUE))
+                .addGap(194, 194, 194))
         );
 
         mainViewCardLayout.add(dashboardPanel, "dashboardPanel");
@@ -353,7 +369,7 @@ public class MainViewStudent extends javax.swing.JPanel {
         );
         gradesPanelLayout.setVerticalGroup(
             gradesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 588, Short.MAX_VALUE)
+            .addGap(0, 594, Short.MAX_VALUE)
         );
 
         mainViewCardLayout.add(gradesPanel, "gradesPanel");
@@ -366,15 +382,225 @@ public class MainViewStudent extends javax.swing.JPanel {
         schedulePanel.setRoundTopLeft(25);
         schedulePanel.setRoundTopRight(25);
 
+        scheduleTitleLabel.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        scheduleTitleLabel.setForeground(new java.awt.Color(191, 205, 214));
+        scheduleTitleLabel.setText("Schedule");
+
+        panelRound2.setBackground(lightBackground);
+        panelRound2.setForeground(foreground);
+        panelRound2.setRoundBottomLeft(25);
+        panelRound2.setRoundBottomRight(25);
+        panelRound2.setRoundTopLeft(25);
+        panelRound2.setRoundTopRight(25);
+
+        mondayPanel.setBackground(lightBackground);
+        mondayPanel.setPreferredSize(new java.awt.Dimension(127, 480));
+        mondayPanel.setLayout(new GridLayout(8, 1, 0, 0));
+
+        javax.swing.GroupLayout mondayPanelLayout = new javax.swing.GroupLayout(mondayPanel);
+        mondayPanel.setLayout(mondayPanelLayout);
+        mondayPanelLayout.setHorizontalGroup(
+            mondayPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 127, Short.MAX_VALUE)
+        );
+        mondayPanelLayout.setVerticalGroup(
+            mondayPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 480, Short.MAX_VALUE)
+        );
+
+        tuesdayPanel.setBackground(lightBackground);
+        tuesdayPanel.setPreferredSize(new java.awt.Dimension(127, 480));
+        tuesdayPanel.setLayout(new GridLayout(8, 1, 0, 0));
+
+        javax.swing.GroupLayout tuesdayPanelLayout = new javax.swing.GroupLayout(tuesdayPanel);
+        tuesdayPanel.setLayout(tuesdayPanelLayout);
+        tuesdayPanelLayout.setHorizontalGroup(
+            tuesdayPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 127, Short.MAX_VALUE)
+        );
+        tuesdayPanelLayout.setVerticalGroup(
+            tuesdayPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        wednesdayPanel.setBackground(lightBackground);
+        wednesdayPanel.setPreferredSize(new java.awt.Dimension(127, 480));
+        wednesdayPanel.setLayout(new GridLayout(8, 1, 0, 0));
+
+        javax.swing.GroupLayout wednesdayPanelLayout = new javax.swing.GroupLayout(wednesdayPanel);
+        wednesdayPanel.setLayout(wednesdayPanelLayout);
+        wednesdayPanelLayout.setHorizontalGroup(
+            wednesdayPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 127, Short.MAX_VALUE)
+        );
+        wednesdayPanelLayout.setVerticalGroup(
+            wednesdayPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        thursdayPanel.setBackground(lightBackground);
+        thursdayPanel.setPreferredSize(new java.awt.Dimension(127, 480));
+        thursdayPanel.setLayout(new GridLayout(8, 1, 0, 0));
+
+        javax.swing.GroupLayout thursdayPanelLayout = new javax.swing.GroupLayout(thursdayPanel);
+        thursdayPanel.setLayout(thursdayPanelLayout);
+        thursdayPanelLayout.setHorizontalGroup(
+            thursdayPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 127, Short.MAX_VALUE)
+        );
+        thursdayPanelLayout.setVerticalGroup(
+            thursdayPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        fridayPanel.setBackground(lightBackground);
+        fridayPanel.setPreferredSize(new java.awt.Dimension(126, 0));
+        fridayPanel.setLayout(new GridLayout(8, 1, 0, 0));
+
+        javax.swing.GroupLayout fridayPanelLayout = new javax.swing.GroupLayout(fridayPanel);
+        fridayPanel.setLayout(fridayPanelLayout);
+        fridayPanelLayout.setHorizontalGroup(
+            fridayPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 130, Short.MAX_VALUE)
+        );
+        fridayPanelLayout.setVerticalGroup(
+            fridayPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel1.setForeground(foreground);
+        jLabel1.setText("Monday");
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel2.setForeground(foreground);
+        jLabel2.setText("Tuesday");
+
+        jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel9.setForeground(foreground);
+        jLabel9.setText("Wednesday");
+
+        jLabel10.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel10.setForeground(foreground);
+        jLabel10.setText("Thursday");
+
+        jLabel11.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel11.setForeground(foreground);
+        jLabel11.setText("Friday");
+
+        mondayStartTime.setForeground(foreground);
+        mondayStartTime.setText("jLabel12");
+
+        tuesdayStartTime.setForeground(foreground);
+        tuesdayStartTime.setText("jLabel13");
+
+        wednesdayStartTime.setForeground(foreground);
+        wednesdayStartTime.setText("jLabel14");
+
+        thursdayStartTime.setForeground(foreground);
+        thursdayStartTime.setText("jLabel15");
+
+        fridayStartTime.setForeground(foreground);
+        fridayStartTime.setText("jLabel16");
+
+        javax.swing.GroupLayout panelRound2Layout = new javax.swing.GroupLayout(panelRound2);
+        panelRound2.setLayout(panelRound2Layout);
+        panelRound2Layout.setHorizontalGroup(
+            panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelRound2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelRound2Layout.createSequentialGroup()
+                        .addComponent(mondayPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(tuesdayPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(wednesdayPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(thursdayPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(fridayPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE))
+                    .addGroup(panelRound2Layout.createSequentialGroup()
+                        .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE)
+                            .addComponent(mondayStartTime, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE)
+                            .addComponent(tuesdayStartTime, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE)
+                            .addComponent(wednesdayStartTime, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(thursdayStartTime, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(fridayStartTime, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE))))
+                .addContainerGap())
+        );
+        panelRound2Layout.setVerticalGroup(
+            panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound2Layout.createSequentialGroup()
+                .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel10)
+                    .addComponent(jLabel11)
+                    .addComponent(jLabel9))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(mondayStartTime)
+                    .addComponent(tuesdayStartTime)
+                    .addComponent(wednesdayStartTime)
+                    .addComponent(thursdayStartTime)
+                    .addComponent(fridayStartTime))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(mondayPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(tuesdayPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(wednesdayPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(thursdayPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(fridayPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 480, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+
+        jLabel1.setHorizontalAlignment(SwingConstants.CENTER);
+        jLabel2.setHorizontalAlignment(SwingConstants.CENTER);
+        jLabel9.setHorizontalAlignment(SwingConstants.CENTER);
+        jLabel10.setHorizontalAlignment(SwingConstants.CENTER);
+        jLabel11.setHorizontalAlignment(SwingConstants.CENTER);
+        mondayStartTime.setHorizontalAlignment(SwingConstants.CENTER);
+        tuesdayStartTime.setHorizontalAlignment(SwingConstants.CENTER);
+        wednesdayStartTime.setHorizontalAlignment(SwingConstants.CENTER);
+        thursdayStartTime.setHorizontalAlignment(SwingConstants.CENTER);
+        fridayStartTime.setHorizontalAlignment(SwingConstants.CENTER);
+
         javax.swing.GroupLayout schedulePanelLayout = new javax.swing.GroupLayout(schedulePanel);
         schedulePanel.setLayout(schedulePanelLayout);
         schedulePanelLayout.setHorizontalGroup(
             schedulePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 663, Short.MAX_VALUE)
+            .addGroup(schedulePanelLayout.createSequentialGroup()
+                .addGroup(schedulePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(schedulePanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(panelRound2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(schedulePanelLayout.createSequentialGroup()
+                        .addGap(267, 267, 267)
+                        .addComponent(scheduleTitleLabel)))
+                .addContainerGap(7, Short.MAX_VALUE))
         );
         schedulePanelLayout.setVerticalGroup(
             schedulePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 588, Short.MAX_VALUE)
+            .addGroup(schedulePanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(scheduleTitleLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(panelRound2, javax.swing.GroupLayout.PREFERRED_SIZE, 533, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(11, Short.MAX_VALUE))
         );
 
         mainViewCardLayout.add(schedulePanel, "schedulePanel");
@@ -469,32 +695,32 @@ public class MainViewStudent extends javax.swing.JPanel {
     absencesPanelLayout.setHorizontalGroup(
         absencesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
         .addGroup(absencesPanelLayout.createSequentialGroup()
-            .addGroup(absencesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(absencesPanelLayout.createSequentialGroup()
-                    .addGap(261, 261, 261)
-                    .addComponent(semesterLabel)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                    .addComponent(semesterOption, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(absencesPanelLayout.createSequentialGroup()
-                    .addGap(283, 283, 283)
-                    .addComponent(absencesTitle))
-                .addGroup(absencesPanelLayout.createSequentialGroup()
-                    .addGap(50, 50, 50)
-                    .addComponent(absencesScrollPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 563, javax.swing.GroupLayout.PREFERRED_SIZE)))
-            .addContainerGap(50, Short.MAX_VALUE))
+            .addGap(283, 283, 283)
+            .addComponent(absencesTitle)
+            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, absencesPanelLayout.createSequentialGroup()
+            .addGap(0, 0, Short.MAX_VALUE)
+            .addComponent(semesterLabel)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+            .addComponent(semesterOption, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGap(261, 261, 261))
+        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, absencesPanelLayout.createSequentialGroup()
+            .addContainerGap(48, Short.MAX_VALUE)
+            .addComponent(absencesScrollPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 566, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGap(49, 49, 49))
     );
     absencesPanelLayout.setVerticalGroup(
         absencesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, absencesPanelLayout.createSequentialGroup()
             .addGap(37, 37, 37)
             .addComponent(absencesTitle)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addGroup(absencesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(semesterLabel)
-                .addComponent(semesterOption, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGap(62, 62, 62)
-            .addComponent(absencesScrollPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addGap(39, 39, 39))
+                .addComponent(semesterOption, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(semesterLabel))
+            .addGap(39, 39, 39)
+            .addComponent(absencesScrollPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
     );
 
     JViewport viewport = absencesScrollPanel.getViewport();
@@ -522,8 +748,7 @@ public class MainViewStudent extends javax.swing.JPanel {
                 .addComponent(mainViewCardLayout, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createSequentialGroup()
                     .addComponent(SideMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGap(0, 0, 0)))
-            .addContainerGap())
+                    .addContainerGap())))
     );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -532,7 +757,7 @@ public class MainViewStudent extends javax.swing.JPanel {
         setLabelColor(label, background, activeForeground);
         lastSwitched = label;
     }
-    
+
     private void dashboardLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dashboardLabelMouseClicked
         switchMenuLabel(dashboardLabel);
         showCard("dashboardPanel");
@@ -540,6 +765,34 @@ public class MainViewStudent extends javax.swing.JPanel {
 
     private void scheduleLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_scheduleLabelMouseClicked
         switchMenuLabel(scheduleLabel);
+        if (scheduleMatrix == null) {
+            scheduleMatrix = new SchedulePanel[5][8];
+            JPanel schedulePanels[] = {mondayPanel, tuesdayPanel, wednesdayPanel, thursdayPanel, fridayPanel};
+            for (int i = 0; i < 5; i++) {
+                for (int j = 0; j < 8; j++) {
+                    SchedulePanel p = new SchedulePanel("", "", lightBackground, foreground);
+                    scheduleMatrix[i][j] = p;
+                    schedulePanels[i].add(p);
+                }
+            }
+        }
+        try {
+            JLabel startTimeLabels[] = {mondayStartTime, tuesdayStartTime, wednesdayStartTime, thursdayStartTime, fridayStartTime};
+            Pair< Pair<Integer, Integer>[], ArrayList< String[]>[]> retValue = studentController.getCourses();
+            ArrayList< String[]>[] courses = retValue.getSecond();
+            Pair<Integer, Integer>[] lowestTimes = retValue.getFirst();
+
+            for (int i = 0; i < courses.length; i++) {
+                startTimeLabels[i].setText(String.format("%02d", lowestTimes[i].getFirst()) + ':' + String.format("%02d", lowestTimes[i].getSecond()));
+                for (int j = 0; j < courses[i].size(); j++) {
+                    scheduleMatrix[i][j].setSubjectName(courses[i].get(j)[0]);
+                    scheduleMatrix[i][j].setProfessorName(courses[i].get(j)[1]);
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MainViewStudent.class.getName()).log(Level.SEVERE, null, ex);
+        }
+//        System.out.println(scheduleMatrix[0][0].getComponentZOrder());
         showCard("schedulePanel");
     }//GEN-LAST:event_scheduleLabelMouseClicked
 
@@ -559,7 +812,7 @@ public class MainViewStudent extends javax.swing.JPanel {
             ArrayList< String[]> absences = studentController.getAbsences(selectedOption);
             DefaultTableModel model = (DefaultTableModel) absencesTable.getModel();
             model.setRowCount(0);
-            for(String[] row : absences) {
+            for (String[] row : absences) {
                 model.addRow(row);
             }
         } catch (SQLException ex) {
@@ -572,11 +825,11 @@ public class MainViewStudent extends javax.swing.JPanel {
         label.setForeground(fg);
         label.setOpaque(true);
     }
-    
+
     public void showCard(String name) {
         cardLayout.show(mainViewCardLayout, name);
     }
-    
+    private SchedulePanel[][] scheduleMatrix = null;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private Views.PanelRound SideMenu;
     private javax.swing.JLabel absencesLabel;
@@ -589,24 +842,41 @@ public class MainViewStudent extends javax.swing.JPanel {
     private javax.swing.JLabel classMasterLabel;
     private javax.swing.JLabel dashboardLabel;
     private Views.PanelRound dashboardPanel;
+    private javax.swing.JPanel fridayPanel;
+    private javax.swing.JLabel fridayStartTime;
     private javax.swing.JLabel gradesLabel;
     private Views.PanelRound gradesPanel;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private Views.PanelRound mainViewCardLayout;
     private javax.swing.JLabel matriculationNrLabel;
+    private javax.swing.JPanel mondayPanel;
+    private javax.swing.JLabel mondayStartTime;
     private Views.PanelRound panelRound1;
+    private Views.PanelRound panelRound2;
     private javax.swing.JLabel residenceLabel;
     private javax.swing.JLabel scheduleLabel;
     private Views.PanelRound schedulePanel;
+    private javax.swing.JLabel scheduleTitleLabel;
     private javax.swing.JLabel semesterLabel;
     private javax.swing.JComboBox<String> semesterOption;
     private javax.swing.JLabel studentEmailLabel;
     private javax.swing.JLabel studentNameLabel;
+    private javax.swing.JPanel thursdayPanel;
+    private javax.swing.JLabel thursdayStartTime;
     private javax.swing.JLabel titleLabel;
+    private javax.swing.JPanel tuesdayPanel;
+    private javax.swing.JLabel tuesdayStartTime;
+    private javax.swing.JPanel wednesdayPanel;
+    private javax.swing.JLabel wednesdayStartTime;
     // End of variables declaration//GEN-END:variables
 }
