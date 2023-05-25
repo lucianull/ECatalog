@@ -35,15 +35,13 @@
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
+          <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="mainViewCardLayout" max="32767" attributes="0"/>
-                  <Group type="102" attributes="0">
-                      <Component id="SideMenu" max="32767" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                  </Group>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Component id="mainViewCardLayout" pref="0" max="32767" attributes="0"/>
+                  <Component id="SideMenu" max="32767" attributes="0"/>
               </Group>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -87,7 +85,7 @@
                   <Component id="scheduleLabel" min="-2" pref="50" max="-2" attributes="0"/>
                   <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                   <Component id="absencesLabel" min="-2" pref="50" max="-2" attributes="0"/>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace pref="230" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -493,11 +491,11 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <EmptySpace min="-2" pref="158" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="149" max="-2" attributes="0"/>
                       <Component id="semesterLabel1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="semesterOption1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="74" max="-2" attributes="0"/>
                       <Component id="subjectLabel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="subjectOption" min="-2" max="-2" attributes="0"/>
@@ -512,7 +510,7 @@
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
                               <Component id="gradesTitle" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="300" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="292" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -532,7 +530,7 @@
                       </Group>
                       <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
                       <Component id="gradesScrollPanel" min="-2" pref="380" max="-2" attributes="0"/>
-                      <EmptySpace pref="74" max="32767" attributes="0"/>
+                      <EmptySpace pref="68" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -597,7 +595,7 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="d6" green="cd" red="bf" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Semestru:"/>
+                <Property name="text" type="java.lang.String" value="Semester:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JComboBox" name="semesterOption1">
@@ -628,7 +626,7 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="d6" green="cd" red="bf" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Note"/>
+                <Property name="text" type="java.lang.String" value="Grades"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="subjectLabel">
@@ -639,7 +637,7 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="d6" green="cd" red="bf" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Materie:"/>
+                <Property name="text" type="java.lang.String" value="Subject:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JComboBox" name="subjectOption">
@@ -681,10 +679,10 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <EmptySpace min="-2" pref="267" max="-2" attributes="0"/>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace pref="283" max="32767" attributes="0"/>
                       <Component id="scheduleTitleLabel" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="298" max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="282" max="-2" attributes="0"/>
                   </Group>
                   <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
@@ -700,13 +698,13 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="scheduleTitleLabel" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="556" max="32767" attributes="0"/>
+                      <EmptySpace pref="550" max="32767" attributes="0"/>
                   </Group>
                   <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="96" max="-2" attributes="0"/>
                           <Component id="scheduleScrollPanel" min="-2" pref="460" max="-2" attributes="0"/>
-                          <EmptySpace pref="38" max="32767" attributes="0"/>
+                          <EmptySpace pref="32" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -831,7 +829,7 @@
                       </Group>
                       <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
                       <Component id="absencesScrollPanel" min="-2" pref="380" max="-2" attributes="0"/>
-                      <EmptySpace pref="74" max="32767" attributes="0"/>
+                      <EmptySpace pref="68" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -896,7 +894,7 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="d6" green="cd" red="bf" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Semestru:"/>
+                <Property name="text" type="java.lang.String" value="Semester:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JComboBox" name="semesterOption">
@@ -927,7 +925,7 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="d6" green="cd" red="bf" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Absente"/>
+                <Property name="text" type="java.lang.String" value="Absences"/>
               </Properties>
             </Component>
           </SubComponents>

@@ -242,7 +242,7 @@ public class StudentsController {
                     break;
             }
             newCourse = new Course(result.getInt("courseId"), result.getInt("starting_time_hour"), result.getInt("starting_time_minute"),
-                    result.getInt("subjectId"), result.getInt("classId"), dayEnum);
+                    result.getInt("subjectId"), result.getInt("classId"), result.getInt("professorId"), dayEnum);
             newCourse.setSubject(new Subject(result.getInt("subjectId"), result.getString("subjectName")));
             studentCourses[dayEnum.ordinal()].add(newCourse);
         }
@@ -264,10 +264,11 @@ public class StudentsController {
             if(result.next()) {
                 subjectId = result.getInt("subjectId");
             }
-            innerSql = "SELECT grade, gradeDate, thesis FROM grades WHERE subjectId = ? AND semester = ? ORDER BY gradeDate";
+            innerSql = "SELECT grade, gradeDate, thesis FROM grades WHERE subjectId = ? AND semester = ? AND studentId = ? ORDER BY gradeDate";
             innerStatement = dbContext.getConnection().prepareStatement(innerSql);
             innerStatement.setInt(1, subjectId);
             innerStatement.setInt(2, sem);
+            innerStatement.setInt(3, currentStudent.getUserId());
             result = innerStatement.executeQuery();
             String grade = null;
             String date = null;
@@ -279,7 +280,7 @@ public class StudentsController {
                 if(result.getByte("thesis") == 1) {
                     grade += "(TEZA)";
                 }
-                date = String.format("%02d-%02d-%04d", Calendar.DAY_OF_MONTH, Calendar.MONTH, Calendar.YEAR);
+                date = String.format("%02d-%02d-%04d", calendar.get(Calendar.DAY_OF_MONTH), calendar.get(Calendar.MONTH) + 1, calendar.get(Calendar.YEAR));
                 grades.add(new String[] {grade, date});
                     
             }

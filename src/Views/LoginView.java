@@ -1,4 +1,3 @@
-
 package Views;
 
 import Controllers.UsersController;
@@ -9,7 +8,7 @@ import java.util.logging.Logger;
 public class LoginView extends javax.swing.JPanel {
 
     private UsersController userController;
-    
+
     public LoginView(UsersController userController) {
         initComponents();
         this.userController = userController;
@@ -276,12 +275,17 @@ public class LoginView extends javax.swing.JPanel {
 
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
         try {
-            if(userController.CheckUser(emailTextbox.getText(), passwordTextbox.getText()) == true){
-                App.getInstance().setMainViewStudent(new MainViewStudent(userController));
-                App.getInstance().showCard("mainViewStudent");
-            }
-            else
-            {
+            if (userController.CheckUser(emailTextbox.getText(), passwordTextbox.getText()) == true) {
+                if (userController.CheckUserType() == false) {
+                    App.getInstance().setMainViewStudent(new MainViewStudent(userController));
+                    App.getInstance().showCard("mainViewStudent");
+                }
+                else
+                {
+                    App.getInstance().setMainViewProfessor(new MainViewProfessor(userController));
+                    App.getInstance().showCard("mainViewProfessor");
+                }
+            } else {
                 wrongAccountLabel.setText("Adresa de email sau parola nu sunt corecte.");
             }
         } catch (SQLException ex) {

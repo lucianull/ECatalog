@@ -8,6 +8,7 @@ public class Course implements Cloneable{
     private int professorId;
     private Day day;
     private Subject subject = null;
+    private int classId;
     
     public enum Day {
         MONDAY,
@@ -17,12 +18,13 @@ public class Course implements Cloneable{
         FRIDAY
     }
 
-    public Course(int courseId, int startHour, int startMinute, int subjectId, int professorId, Day day) {
+    public Course(int courseId, int startHour, int startMinute, int subjectId, int classId, int professorId, Day day) {
         this.courseId = courseId;
         this.startHour = startHour;
         this.startMinute = startMinute;
         this.subjectId = subjectId;
         this.professorId = professorId;
+        this.classId = classId;
         this.day = day;
     }
 
@@ -36,6 +38,14 @@ public class Course implements Cloneable{
 
     public int getStartHour() {
         return startHour;
+    }
+
+    public int getClassId() {
+        return classId;
+    }
+
+    public void setClassId(int classId) {
+        this.classId = classId;
     }
 
     public void setStartHour(int startHour) {

@@ -2,15 +2,11 @@ package Views;
 
 import Controllers.StudentsController;
 import Controllers.UsersController;
-import Misc.Pair;
-import Models.Course;
 import Models.Student;
 import java.awt.CardLayout;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.GridLayout;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -18,13 +14,10 @@ import java.util.logging.Logger;
 import javax.swing.BorderFactory;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JViewport;
 import javax.swing.SwingConstants;
-import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import java.awt.Component;
 
@@ -215,7 +208,7 @@ public class MainViewStudent extends javax.swing.JPanel {
                 .addComponent(scheduleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(absencesLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(230, Short.MAX_VALUE))
         );
 
         mainViewCardLayout.setBackground(new java.awt.Color(60, 73, 82));
@@ -438,7 +431,7 @@ public class MainViewStudent extends javax.swing.JPanel {
 
     semesterLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
     semesterLabel1.setForeground(new java.awt.Color(191, 205, 214));
-    semesterLabel1.setText("Semestru:");
+    semesterLabel1.setText("Semester:");
 
     semesterOption1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
     semesterOption1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "I", "II" }));
@@ -451,11 +444,11 @@ public class MainViewStudent extends javax.swing.JPanel {
 
     gradesTitle.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
     gradesTitle.setForeground(new java.awt.Color(191, 205, 214));
-    gradesTitle.setText("Note");
+    gradesTitle.setText("Grades");
 
     subjectLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
     subjectLabel.setForeground(new java.awt.Color(191, 205, 214));
-    subjectLabel.setText("Materie:");
+    subjectLabel.setText("Subject:");
 
     subjectOption.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
     subjectOption.setSelectedIndex(-1);
@@ -470,11 +463,11 @@ public class MainViewStudent extends javax.swing.JPanel {
     gradesPanelLayout.setHorizontalGroup(
         gradesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
         .addGroup(gradesPanelLayout.createSequentialGroup()
-            .addGap(158, 158, 158)
+            .addGap(149, 149, 149)
             .addComponent(semesterLabel1)
             .addGap(18, 18, 18)
             .addComponent(semesterOption1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addGap(57, 57, 57)
+            .addGap(74, 74, 74)
             .addComponent(subjectLabel)
             .addGap(18, 18, 18)
             .addComponent(subjectOption, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -487,7 +480,7 @@ public class MainViewStudent extends javax.swing.JPanel {
                     .addGap(49, 49, 49))
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, gradesPanelLayout.createSequentialGroup()
                     .addComponent(gradesTitle)
-                    .addGap(300, 300, 300))))
+                    .addGap(292, 292, 292))))
     );
     gradesPanelLayout.setVerticalGroup(
         gradesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -502,7 +495,7 @@ public class MainViewStudent extends javax.swing.JPanel {
                 .addComponent(semesterOption1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGap(39, 39, 39)
             .addComponent(gradesScrollPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addContainerGap(74, Short.MAX_VALUE))
+            .addContainerGap(68, Short.MAX_VALUE))
     );
 
     JViewport viewport = gradesScrollPanel.getViewport();
@@ -590,10 +583,10 @@ public class MainViewStudent extends javax.swing.JPanel {
     schedulePanel.setLayout(schedulePanelLayout);
     schedulePanelLayout.setHorizontalGroup(
         schedulePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addGroup(schedulePanelLayout.createSequentialGroup()
-            .addGap(267, 267, 267)
+        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, schedulePanelLayout.createSequentialGroup()
+            .addContainerGap(283, Short.MAX_VALUE)
             .addComponent(scheduleTitleLabel)
-            .addContainerGap(298, Short.MAX_VALUE))
+            .addGap(282, 282, 282))
         .addGroup(schedulePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(schedulePanelLayout.createSequentialGroup()
                 .addGap(48, 48, 48)
@@ -605,12 +598,12 @@ public class MainViewStudent extends javax.swing.JPanel {
         .addGroup(schedulePanelLayout.createSequentialGroup()
             .addContainerGap()
             .addComponent(scheduleTitleLabel)
-            .addContainerGap(556, Short.MAX_VALUE))
+            .addContainerGap(550, Short.MAX_VALUE))
         .addGroup(schedulePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(schedulePanelLayout.createSequentialGroup()
                 .addGap(96, 96, 96)
                 .addComponent(scheduleScrollPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 460, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(38, Short.MAX_VALUE)))
+                .addContainerGap(32, Short.MAX_VALUE)))
     );
 
     viewport = scheduleScrollPanel.getViewport();
@@ -689,7 +682,7 @@ public class MainViewStudent extends javax.swing.JPanel {
 
     semesterLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
     semesterLabel.setForeground(new java.awt.Color(191, 205, 214));
-    semesterLabel.setText("Semestru:");
+    semesterLabel.setText("Semester:");
 
     semesterOption.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
     semesterOption.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "I", "II" }));
@@ -702,7 +695,7 @@ public class MainViewStudent extends javax.swing.JPanel {
 
     absencesTitle.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
     absencesTitle.setForeground(new java.awt.Color(191, 205, 214));
-    absencesTitle.setText("Absente");
+    absencesTitle.setText("Absences");
 
     javax.swing.GroupLayout absencesPanelLayout = new javax.swing.GroupLayout(absencesPanel);
     absencesPanel.setLayout(absencesPanelLayout);
@@ -734,7 +727,7 @@ public class MainViewStudent extends javax.swing.JPanel {
                 .addComponent(semesterLabel))
             .addGap(39, 39, 39)
             .addComponent(absencesScrollPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addContainerGap(74, Short.MAX_VALUE))
+            .addContainerGap(68, Short.MAX_VALUE))
     );
 
     viewport = absencesScrollPanel.getViewport();
@@ -756,13 +749,12 @@ public class MainViewStudent extends javax.swing.JPanel {
     );
     layout.setVerticalGroup(
         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addGroup(layout.createSequentialGroup()
+        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
             .addContainerGap()
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(mainViewCardLayout, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createSequentialGroup()
-                    .addComponent(SideMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addContainerGap())))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addComponent(mainViewCardLayout, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addComponent(SideMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addContainerGap())
     );
     }// </editor-fold>//GEN-END:initComponents
 

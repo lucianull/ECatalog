@@ -10,6 +10,7 @@ public class App extends javax.swing.JFrame {
     private CardLayout cardLayout;
     private UsersController userController;
     private MainViewStudent mainViewStudent = null;
+    private MainViewProfessor mainViewProfessor = null;
     static String databaseUrl = "jdbc:mysql://localhost:3307/netbeansapp";
     static String databaseUsername = "root";
     static String databasePassword = "123456";
@@ -34,6 +35,10 @@ public class App extends javax.swing.JFrame {
     public void setMainViewStudent(MainViewStudent mainViewStudent) {
         this.mainViewStudent = mainViewStudent;
         cards.add(mainViewStudent, "mainViewStudent");
+    }
+    public void setMainViewProfessor(MainViewProfessor mainViewProfessor) {
+        this.mainViewProfessor = mainViewProfessor;
+        cards.add(mainViewProfessor, "mainViewProfessor");
     }
 
     public void showCard(String name) {

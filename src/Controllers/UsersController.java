@@ -74,4 +74,10 @@ public class UsersController {
         }
         return false;
     }
+    public boolean CheckUserType() {
+        if(currentUser instanceof Student) {
+            return false;
+        }
+        return true;
+    }
 }
