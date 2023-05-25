@@ -13,9 +13,7 @@ public class Course implements Cloneable{
         TUESDAY,
         WEDNESDAY,
         THURSDAY,
-        FRIDAY,
-        SATURDAY,
-        SUNDAY
+        FRIDAY
     }
 
     public Course(int courseId, int startHour, int startMinute, int subjectId, int professorId, Day day) {

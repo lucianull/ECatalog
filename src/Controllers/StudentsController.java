@@ -129,27 +129,25 @@ public class StudentsController {
         return absences;
     }
 
-    public Pair < Pair<Integer, Integer>[], ArrayList< String[]>[] > getCourses() throws SQLException {
+    public ArrayList< String[]>[] getCourses() throws SQLException {
         ArrayList< String[]>[] courses = new ArrayList[5];
         for (int i = 0; i < 5; i++) {
             courses[i] = new ArrayList< String[]>();
         }
-        ArrayList< Course> studentCourses = currentStudent.getStudentClass().getCourses();
+        ArrayList < Course> [] studentCourses = currentStudent.getStudentClass().getCourses();
         if (studentCourses == null) {
-            studentCourses = new ArrayList< Course>();
-            String innerSql = "SELECT * FROM classcourses WHERE classId = ?";
+            studentCourses = new ArrayList [5];
+            for(int i = 0; i < studentCourses.length; i++) {
+                studentCourses[i] = new ArrayList < Course > ();
+            }
+            String innerSql = "SELECT * FROM classcourses t1 LEFT JOIN courses t2 ON t1.courseId = t2.courseId WHERE t1.classId = ? ORDER BY t2.starting_time_hour, t2.starting_time_minute";
             PreparedStatement innerStatement = dbContext.getConnection().prepareStatement(innerSql);
             innerStatement.setInt(1, currentStudent.getStudentClass().getClassId());
             ResultSet result = innerStatement.executeQuery();
             while (result.next()) {
-                String sql = "SELECT * FROM courses WHERE courseId = ?";
-                PreparedStatement statement = dbContext.getConnection().prepareStatement(sql);
-                statement.setInt(1, result.getInt("courseId"));
-                ResultSet r = statement.executeQuery();
-                if (r.next()) {
-                    Course.Day dayEnum = Course.Day.SUNDAY;
-                    String receivedDay = r.getString("day");
-                    switch (receivedDay) {
+               Course.Day dayEnum = Course.Day.MONDAY;
+               String receivedDay = result.getString("day");
+               switch (receivedDay) {
                         case "Monday":
                             dayEnum = Course.Day.MONDAY;
                             break;
@@ -165,57 +163,44 @@ public class StudentsController {
                         case "Friday":
                             dayEnum = Course.Day.FRIDAY;
                             break;
-                        case "Saturday":
-                            dayEnum = Course.Day.SATURDAY;
-                            break;
-                        case "Sunday":
-                            dayEnum = Course.Day.SUNDAY;
-                            break;
                     }
-                    studentCourses.add(new Course(r.getInt("courseId"), r.getInt("starting_time_hour"), r.getInt("starting_time_minute"),
-                            r.getInt("subjectId"), r.getInt("classId"), dayEnum));
-                }
+                studentCourses[dayEnum.ordinal()].add(new Course(result.getInt("courseId"), result.getInt("starting_time_hour"), result.getInt("starting_time_minute"),
+                            result.getInt("subjectId"), result.getInt("classId"), dayEnum));
             }
             currentStudent.getStudentClass().setCourses(studentCourses);
         }
         HashMap< Integer, String> subjects = new HashMap< Integer, String>();
         HashMap< Integer, String> professors = new HashMap< Integer, String>();
-        Pair<Integer, Integer>[] lowestTimes = new Pair[5];
-        lowestTimes[0] = new Pair<>(23, 59);
-        lowestTimes[1] = new Pair<>(23, 59);
-        lowestTimes[2] = new Pair<>(23, 59);
-        lowestTimes[3] = new Pair<>(23, 59);
-        lowestTimes[4] = new Pair<>(23, 59);
-        for (Course course : studentCourses) {
-            if (subjects.containsKey(course.getSubjectId()) == false) {
-                String sql = "SELECT subjectName FROM subjects WHERE subjectId = ?";
-                PreparedStatement statement = dbContext.getConnection().prepareStatement(sql);
-                statement = dbContext.getConnection().prepareStatement(sql);
-                statement.setInt(1, course.getSubjectId());
-                ResultSet result = statement.executeQuery();
-                if (result.next()) {
-                    subjects.put(course.getSubjectId(), result.getString("subjectName"));
+        
+        for(int i = 0; i < studentCourses.length; i++) {
+            for(Course course : studentCourses[i]) {
+                if(subjects.containsKey(course.getSubjectId()) == false) {
+                    String sql = "SELECT subjectName FROM subjects WHERE subjectId = ?";
+                    PreparedStatement statement = dbContext.getConnection().prepareStatement(sql);
+                    statement = dbContext.getConnection().prepareStatement(sql);
+                    statement.setInt(1, course.getSubjectId());
+                    ResultSet result = statement.executeQuery();
+                    if (result.next()) {
+                        subjects.put(course.getSubjectId(), result.getString("subjectName"));
+                    }
                 }
-            }
-            if (professors.containsKey(course.getProfessorId()) == false) {
-                String sql = "SELECT firstName, lastName FROM users WHERE userId = ?";
-                PreparedStatement statement = dbContext.getConnection().prepareStatement(sql);
-                statement.setInt(1, course.getProfessorId());
-                ResultSet result = statement.executeQuery();
-                if (result.next()) {
-                    professors.put(course.getProfessorId(), result.getString("lastName") + ' ' + result.getString("firstName").charAt(0) + '.');
+                if (professors.containsKey(course.getProfessorId()) == false) {
+                    String sql = "SELECT firstName, lastName FROM users WHERE userId = ?";
+                    PreparedStatement statement = dbContext.getConnection().prepareStatement(sql);
+                    statement.setInt(1, course.getProfessorId());
+                    ResultSet result = statement.executeQuery();
+                    if (result.next()) {
+                        professors.put(course.getProfessorId(), result.getString("lastName") + ' ' + result.getString("firstName").charAt(0) + '.');
+                    }
                 }
+                String[] courseDetails = new String[]{
+                    subjects.get(course.getSubjectId()),
+                    professors.get(course.getProfessorId()),
+                    String.format("%02d", course.getStartHour()) + ':' + String.format("%02d", course.getStartMinute())
+                };
+                courses[i].add(courseDetails);
             }
-            if (course.getStartHour() < lowestTimes[course.getDay().ordinal()].getFirst()) {
-                lowestTimes[course.getDay().ordinal()].setFirst(course.getStartHour());
-                lowestTimes[course.getDay().ordinal()].setSecond(course.getStartMinute());
-            } else if (course.getStartHour() == lowestTimes[course.getDay().ordinal()].getFirst() 
-                    && course.getStartMinute() < lowestTimes[course.getDay().ordinal()].getSecond()) {
-                lowestTimes[course.getDay().ordinal()].setSecond(course.getStartMinute());
-            }       
-            courses[course.getDay().ordinal()].add(new String[]{subjects.get(course.getSubjectId()), professors.get(course.getProfessorId())});
         }
-        Pair<Pair<Integer, Integer>[], ArrayList<String[]>[]> retValue = new Pair<>(lowestTimes, courses);
-        return retValue;
+        return courses;
     }
 }

@@ -10,7 +10,7 @@ public class Class implements Cloneable{
     private String name;
     private int classMasterId;
     private Professor classMaster = null;
-    ArrayList < Course > courses = null;
+    ArrayList < Course > [] courses = null;
 
     public Class(int classId, String name, int classMasterId) {
         this.classId = classId;
@@ -50,11 +50,11 @@ public class Class implements Cloneable{
         this.classMaster = classMaster;
     }
 
-    public ArrayList< Course > getCourses() {
+    public ArrayList<Course>[] getCourses() {
         return courses;
     }
 
-    public void setCourses(ArrayList < Course > courses) {
+    public void setCourses(ArrayList<Course>[] courses) {
         this.courses = courses;
     }
     
@@ -89,4 +89,5 @@ public class Class implements Cloneable{
             throw new AssertionError();
         }
     }
+    
 }
