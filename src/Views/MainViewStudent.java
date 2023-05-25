@@ -116,6 +116,13 @@ public class MainViewStudent extends javax.swing.JPanel {
         classLabel = new javax.swing.JLabel();
         classMasterLabel = new javax.swing.JLabel();
         gradesPanel = new Views.PanelRound();
+        gradesScrollPanel = new javax.swing.JScrollPane();
+        gradesTable = new javax.swing.JTable();
+        semesterLabel1 = new javax.swing.JLabel();
+        semesterOption1 = new javax.swing.JComboBox<>();
+        gradesTitle = new javax.swing.JLabel();
+        subjectLabel = new javax.swing.JLabel();
+        subjectOption = new javax.swing.JComboBox<>();
         schedulePanel = new Views.PanelRound();
         scheduleTitleLabel = new javax.swing.JLabel();
         scheduleScrollPanel = new javax.swing.JScrollPane();
@@ -369,42 +376,17 @@ public class MainViewStudent extends javax.swing.JPanel {
         gradesPanel.setRoundTopLeft(25);
         gradesPanel.setRoundTopRight(25);
 
-        javax.swing.GroupLayout gradesPanelLayout = new javax.swing.GroupLayout(gradesPanel);
-        gradesPanel.setLayout(gradesPanelLayout);
-        gradesPanelLayout.setHorizontalGroup(
-            gradesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 663, Short.MAX_VALUE)
-        );
-        gradesPanelLayout.setVerticalGroup(
-            gradesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 594, Short.MAX_VALUE)
-        );
+        gradesScrollPanel.setBackground(lightBackground);
 
-        mainViewCardLayout.add(gradesPanel, "gradesPanel");
-
-        schedulePanel.setBackground(new java.awt.Color(60, 73, 82));
-        schedulePanel.setForeground(new java.awt.Color(60, 73, 82));
-        schedulePanel.setToolTipText("");
-        schedulePanel.setRoundBottomLeft(25);
-        schedulePanel.setRoundBottomRight(25);
-        schedulePanel.setRoundTopLeft(25);
-        schedulePanel.setRoundTopRight(25);
-
-        scheduleTitleLabel.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        scheduleTitleLabel.setForeground(new java.awt.Color(191, 205, 214));
-        scheduleTitleLabel.setText("Schedule");
-
-        scheduleScrollPanel.setBackground(lightBackground);
-
-        scheduleTable.setBackground(lightBackground);
-        scheduleTable.setFont(new java.awt.Font("Segoe UI", Font.PLAIN, 18));
-        scheduleTable.setForeground(new java.awt.Color(191, 205, 214));
-        scheduleTable.setModel(new javax.swing.table.DefaultTableModel(
+        gradesTable.setBackground(lightBackground);
+        gradesTable.setFont(new java.awt.Font("Segoe UI", Font.PLAIN, 18));
+        gradesTable.setForeground(new java.awt.Color(191, 205, 214));
+        gradesTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"
+                "Nota", "Data"
             }
         ) {
             @Override
@@ -416,6 +398,153 @@ public class MainViewStudent extends javax.swing.JPanel {
                 return false;
             }
         }
+    );
+    gradesTable.setToolTipText("");
+    gradesTable.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+    gradesTable.setEnabled(false);
+    gradesTable.setFocusable(false);
+    gradesTable.setGridColor(background);
+    gradesTable.setRowHeight(30);
+    gradesTable.setRowSelectionAllowed(false);
+    gradesTable.setSelectionBackground(new java.awt.Color(60, 73, 82));
+    gradesScrollPanel.setViewportView(gradesTable);
+    gradesTable.getTableHeader().setFont(new Font("Segoe UI", Font.PLAIN, 18));
+    gradesTable.getTableHeader().setForeground(foreground);
+    gradesTable.getTableHeader().setBackground(lightBackground);
+    gradesTable.getTableHeader().setBorder(BorderFactory.createMatteBorder(0, 0, 2, 0, background));
+    gradesTable.setBorder(BorderFactory.createLineBorder(background));
+    gradesTable.getTableHeader().setOpaque(true);
+    gradesTable.getTableHeader().setResizingAllowed(false);
+    gradesTable.getTableHeader().setReorderingAllowed(false);
+    gradesTable.getTableHeader().setDefaultRenderer(new DefaultTableCellRenderer() {
+        {
+            setHorizontalAlignment(JLabel.CENTER);
+            setVerticalAlignment(JLabel.CENTER);
+            setOpaque(true);
+            setBackground(lightBackground);
+            setBorder(BorderFactory.createMatteBorder(0, 0, 5, 2, background)); // set bottom and right border to background color
+            setForeground(foreground);
+        }
+        @Override
+        public Component getTableCellRendererComponent(JTable table, Object value,
+            boolean isSelected, boolean hasFocus, int row, int column) {
+            JComponent c = (JComponent) super.getTableCellRendererComponent(table, value,
+                isSelected, hasFocus, row, column);
+            c.setBorder(BorderFactory.createLineBorder(background));
+            return c;
+        }
+    });
+    gradesTable.getTableHeader().setPreferredSize(new Dimension(gradesTable.getTableHeader().getWidth(), 40));
+
+    semesterLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+    semesterLabel1.setForeground(new java.awt.Color(191, 205, 214));
+    semesterLabel1.setText("Semestru:");
+
+    semesterOption1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+    semesterOption1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "I", "II" }));
+    semesterOption1.setSelectedIndex(-1);
+    semesterOption1.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            semesterOption1ActionPerformed(evt);
+        }
+    });
+
+    gradesTitle.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+    gradesTitle.setForeground(new java.awt.Color(191, 205, 214));
+    gradesTitle.setText("Note");
+
+    subjectLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+    subjectLabel.setForeground(new java.awt.Color(191, 205, 214));
+    subjectLabel.setText("Materie:");
+
+    subjectOption.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+    subjectOption.setSelectedIndex(-1);
+    subjectOption.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            subjectOptionActionPerformed(evt);
+        }
+    });
+
+    javax.swing.GroupLayout gradesPanelLayout = new javax.swing.GroupLayout(gradesPanel);
+    gradesPanel.setLayout(gradesPanelLayout);
+    gradesPanelLayout.setHorizontalGroup(
+        gradesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGroup(gradesPanelLayout.createSequentialGroup()
+            .addGap(158, 158, 158)
+            .addComponent(semesterLabel1)
+            .addGap(18, 18, 18)
+            .addComponent(semesterOption1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGap(57, 57, 57)
+            .addComponent(subjectLabel)
+            .addGap(18, 18, 18)
+            .addComponent(subjectOption, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, gradesPanelLayout.createSequentialGroup()
+            .addContainerGap(48, Short.MAX_VALUE)
+            .addGroup(gradesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, gradesPanelLayout.createSequentialGroup()
+                    .addComponent(gradesScrollPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 566, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(49, 49, 49))
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, gradesPanelLayout.createSequentialGroup()
+                    .addComponent(gradesTitle)
+                    .addGap(300, 300, 300))))
+    );
+    gradesPanelLayout.setVerticalGroup(
+        gradesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, gradesPanelLayout.createSequentialGroup()
+            .addGap(37, 37, 37)
+            .addComponent(gradesTitle)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addGroup(gradesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(semesterLabel1)
+                .addComponent(subjectLabel)
+                .addComponent(subjectOption, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(semesterOption1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGap(39, 39, 39)
+            .addComponent(gradesScrollPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addContainerGap(74, Short.MAX_VALUE))
+    );
+
+    JViewport viewport = gradesScrollPanel.getViewport();
+    viewport.setBackground(lightBackground);
+    gradesScrollPanel.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, background));
+
+    mainViewCardLayout.add(gradesPanel, "gradesPanel");
+
+    schedulePanel.setBackground(new java.awt.Color(60, 73, 82));
+    schedulePanel.setForeground(new java.awt.Color(60, 73, 82));
+    schedulePanel.setToolTipText("");
+    schedulePanel.setRoundBottomLeft(25);
+    schedulePanel.setRoundBottomRight(25);
+    schedulePanel.setRoundTopLeft(25);
+    schedulePanel.setRoundTopRight(25);
+
+    scheduleTitleLabel.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+    scheduleTitleLabel.setForeground(new java.awt.Color(191, 205, 214));
+    scheduleTitleLabel.setText("Schedule");
+
+    scheduleScrollPanel.setBackground(lightBackground);
+
+    scheduleTable.setBackground(lightBackground);
+    scheduleTable.setFont(new java.awt.Font("Segoe UI", Font.PLAIN, 18));
+    scheduleTable.setForeground(new java.awt.Color(191, 205, 214));
+    scheduleTable.setModel(new javax.swing.table.DefaultTableModel(
+        new Object [][] {
+
+        },
+        new String [] {
+            "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"
+        }
+    ) {
+        @Override
+        public Class<?> getColumnClass(int columnIndex) {
+            return String.class;
+        }
+        @Override
+        public boolean isCellEditable(int row, int column) {
+            return false;
+        }
+    }
     );
     scheduleTable.setToolTipText("");
     scheduleTable.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -484,7 +613,7 @@ public class MainViewStudent extends javax.swing.JPanel {
                 .addContainerGap(38, Short.MAX_VALUE)))
     );
 
-    JViewport viewport = scheduleScrollPanel.getViewport();
+    viewport = scheduleScrollPanel.getViewport();
     viewport.setBackground(lightBackground);
     scheduleScrollPanel.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, background));
 
@@ -651,23 +780,19 @@ public class MainViewStudent extends javax.swing.JPanel {
     private void scheduleLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_scheduleLabelMouseClicked
         switchMenuLabel(scheduleLabel);
         if (studentCourses == null) {
-            try {
-                studentCourses = studentController.getCourses();
-
-            } catch (SQLException ex) {
-                Logger.getLogger(MainViewStudent.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            studentCourses = studentController.getCourses();
         }
         DefaultTableModel model = (DefaultTableModel) scheduleTable.getModel();
         model.setRowCount(8);
-        for(int i = 0; i < 5; i++)
-            for(int j = 0; j < 8; j++)
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 8; j++) {
                 model.setValueAt("", j, i);
+            }
+        }
         for (int i = 0; i < studentCourses.length; i++) {
             int j = 0;
             for (String[] course : studentCourses[i]) {
 
-                System.out.println(course[0]);
                 model.setValueAt(course[0] + ' ' + course[1] + ' ' + course[2], j, i);
                 j++;
             }
@@ -677,6 +802,10 @@ public class MainViewStudent extends javax.swing.JPanel {
 
     private void gradesLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_gradesLabelMouseClicked
         switchMenuLabel(gradesLabel);
+        if (subjectOption.getItemCount() == 0) {
+            subjectOption.setModel(new javax.swing.DefaultComboBoxModel<>(studentController.getSubjects()));
+            subjectOption.setSelectedIndex(-1);
+        }
         showCard("gradesPanel");
     }//GEN-LAST:event_gradesLabelMouseClicked
 
@@ -699,10 +828,35 @@ public class MainViewStudent extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_semesterOptionActionPerformed
 
+    private void semesterOption1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_semesterOption1ActionPerformed
+        String selectedSemester = (String) semesterOption1.getSelectedItem();
+        String selectedSubject = (String) subjectOption.getSelectedItem();
+        if (selectedSemester != null && selectedSubject != null) {
+            insertGrades(selectedSemester, selectedSubject);
+        }
+    }//GEN-LAST:event_semesterOption1ActionPerformed
+
+    private void subjectOptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subjectOptionActionPerformed
+        String selectedSemester = (String) semesterOption1.getSelectedItem();
+        String selectedSubject = (String) subjectOption.getSelectedItem();
+        if (selectedSemester != null && selectedSubject != null) {
+            insertGrades(selectedSemester, selectedSubject);
+        }
+    }//GEN-LAST:event_subjectOptionActionPerformed
+
     private void setLabelColor(JLabel label, Color bg, Color fg) {
         label.setBackground(bg);
         label.setForeground(fg);
         label.setOpaque(true);
+    }
+
+    private void insertGrades(String sem, String subj) {
+        ArrayList< String[]> grades = studentController.getGrades(sem, subj);
+        DefaultTableModel model = (DefaultTableModel) gradesTable.getModel();
+        model.setRowCount(0);
+        for (String[] row : grades) {
+            model.addRow(row);
+        }
     }
 
     public void showCard(String name) {
@@ -723,6 +877,9 @@ public class MainViewStudent extends javax.swing.JPanel {
     private Views.PanelRound dashboardPanel;
     private javax.swing.JLabel gradesLabel;
     private Views.PanelRound gradesPanel;
+    private javax.swing.JScrollPane gradesScrollPanel;
+    private javax.swing.JTable gradesTable;
+    private javax.swing.JLabel gradesTitle;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -739,9 +896,13 @@ public class MainViewStudent extends javax.swing.JPanel {
     private javax.swing.JTable scheduleTable;
     private javax.swing.JLabel scheduleTitleLabel;
     private javax.swing.JLabel semesterLabel;
+    private javax.swing.JLabel semesterLabel1;
     private javax.swing.JComboBox<String> semesterOption;
+    private javax.swing.JComboBox<String> semesterOption1;
     private javax.swing.JLabel studentEmailLabel;
     private javax.swing.JLabel studentNameLabel;
+    private javax.swing.JLabel subjectLabel;
+    private javax.swing.JComboBox<String> subjectOption;
     private javax.swing.JLabel titleLabel;
     // End of variables declaration//GEN-END:variables
 }

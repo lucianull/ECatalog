@@ -7,6 +7,7 @@ public class Course implements Cloneable{
     private int subjectId;
     private int professorId;
     private Day day;
+    private Subject subject = null;
     
     public enum Day {
         MONDAY,
@@ -71,6 +72,14 @@ public class Course implements Cloneable{
 
     public void setDay(Day day) {
         this.day = day;
+    }
+
+    public Subject getSubject() {
+        return subject;
+    }
+
+    public void setSubject(Subject subject) {
+        this.subject = subject;
     }
 
     @Override
