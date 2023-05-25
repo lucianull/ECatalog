@@ -1,5 +1,6 @@
 package Controllers;
 
+import Misc.ILogPrinter;
 import Models.Course;
 import Models.Professor;
 import Models.Subject;
@@ -8,17 +9,16 @@ import SQLDatabase.DbContext;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.ResultSet;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.Date;
 
-public class ProfessorsController {
+public class ProfessorsController implements ILogPrinter{
 
     private DbContext dbContext;
     private Professor currentProfessor;
@@ -106,30 +106,30 @@ public class ProfessorsController {
             ResultSet result = statement.executeQuery();
             String grade = null;
             String date = null;
-            while(result.next()) {
+            while (result.next()) {
                 java.sql.Date gradeDate = result.getDate("gradeDate");
                 Calendar calendar = Calendar.getInstance();
                 calendar.setTime(gradeDate);
                 grade = Float.toString(result.getFloat("grade"));
-                if(result.getByte("thesis") == 1) {
+                if (result.getByte("thesis") == 1) {
                     grade += "(TEZA)";
                 }
                 date = String.format("%02d-%02d-%04d", calendar.get(Calendar.DAY_OF_MONTH), calendar.get(Calendar.MONTH) + 1, calendar.get(Calendar.YEAR));
-                grades.add(new String[] {grade, date});
-                    
+                grades.add(new String[]{grade, date});
+
             }
         } catch (SQLException ex) {
             Logger.getLogger(ProfessorsController.class.getName()).log(Level.SEVERE, null, ex);
         }
         return grades;
     }
-    
-    public ArrayList< String > getAbsences(String student, String semester, String subject) {
+
+    public ArrayList< String> getAbsences(String student, String semester, String subject) {
         byte sem = 0;
         if (semester.equals("II")) {
             sem = 1;
         }
-        ArrayList< String > grades = new ArrayList < String >();
+        ArrayList< String> grades = new ArrayList< String>();
         try {
             String sql = "SELECT * FROM studentabsences WHERE studentId = ? AND subjectId = ? AND semester = ? ORDER BY absence_date";
             PreparedStatement statement = dbContext.getConnection().prepareStatement(sql);
@@ -140,13 +140,13 @@ public class ProfessorsController {
             ResultSet result = statement.executeQuery();
             String grade = null;
             String date = null;
-            while(result.next()) {
+            while (result.next()) {
                 java.sql.Date gradeDate = result.getDate("absence_date");
                 Calendar calendar = Calendar.getInstance();
                 calendar.setTime(gradeDate);
                 date = String.format("%02d-%02d-%04d", calendar.get(Calendar.DAY_OF_MONTH), calendar.get(Calendar.MONTH) + 1, calendar.get(Calendar.YEAR));
                 grades.add(date);
-                    
+
             }
         } catch (SQLException ex) {
             Logger.getLogger(ProfessorsController.class.getName()).log(Level.SEVERE, null, ex);
@@ -173,13 +173,16 @@ public class ProfessorsController {
             statement.setByte(6, thesis);
             int rowsAffected = statement.executeUpdate();
             if (rowsAffected > 0) {
-                System.out.println("Record inserted successfully.");
+                PrintLog("Inserted grade - Semester: " + semester + ", Subject: " + subject + ", Student: " + student + ", Grade: " + grade + ", Thesis: " + thesis);
+            }
+            else {
+                PrintLog("Failed to insert grade - Semester: " + semester + ", Subject: " + subject + ", Student: " + student + ", Grade: " + grade + ", Thesis: " + thesis);
             }
         } catch (SQLException ex) {
             Logger.getLogger(ProfessorsController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     public void insertAbsence(String semester, String subject, String className, String student) {
         try {
             byte sem = 0;
@@ -197,13 +200,16 @@ public class ProfessorsController {
             statement.setByte(4, sem);
             int rowsAffected = statement.executeUpdate();
             if (rowsAffected > 0) {
-                System.out.println("Record inserted successfully.");
+                PrintLog("Inserted absence - Semester: " + semester + ", Subject: " + subject + ", Student: " + student + ", Date: " + sqlDate.toString());
+            }
+            else {
+                PrintLog("Failed to insert absence - Semester: " + semester + ", Subject: " + subject + ", Student: " + student + ", Date: " + sqlDate.toString());
             }
         } catch (SQLException ex) {
             Logger.getLogger(ProfessorsController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     public ArrayList< String[]>[] getCourses() {
         ArrayList< String[]>[] courses = new ArrayList[5];
         for (int i = 0; i < 5; i++) {
@@ -260,6 +266,7 @@ public class ProfessorsController {
         }
         return courses;
     }
+
     private void initSchedule() throws SQLException {
         ArrayList< Course>[] schedule = new ArrayList[5];
         Course newCourse = null;
@@ -296,5 +303,69 @@ public class ProfessorsController {
             schedule[dayEnum.ordinal()].add(newCourse);
         }
         currentProfessor.setSchedule(schedule);
+    }
+
+    public void deleteAbsence(String semester, String subject, String student, String dateString) {
+        byte sem = 0;
+        if (semester.equals("II")) {
+            sem = 1;
+        }
+        try {
+            SimpleDateFormat inputFormat = new SimpleDateFormat("dd-MM-yyyy");
+            Date date = inputFormat.parse(dateString);
+            java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+            String sql = "DELETE FROM studentabsences WHERE semester = ? AND subjectId = ? AND studentId = ? AND absence_date = ? LIMIT 1";
+            PreparedStatement statement = dbContext.getConnection().prepareStatement(sql);
+            statement.setByte(1, sem);
+            statement.setInt(2, professorSubjects.get(subject));
+            statement.setInt(3, professorStudents.get(student));
+            statement.setDate(4, sqlDate);
+            int rowsAffected = statement.executeUpdate();
+            if (rowsAffected > 0) {
+                PrintLog("Deleted absence - Semester: " + semester + ", Subject: " + subject + ", Student: " + student + ", Date: " + dateString);
+            }
+            else {
+                PrintLog("Failed to delete absence - Semester: " + semester + ", Subject: " + subject + ", Student: " + student + ", Date: " + dateString);
+            }
+        } catch (ParseException ex) {
+            Logger.getLogger(ProfessorsController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(ProfessorsController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    public void deleteGrade(String semester, String subject, String student, String dateString, String grade) {
+        byte sem = 0;
+        byte thesis = 0;
+        if (semester.equals("II")) {
+            sem = 1;
+        }
+        if(grade.substring(grade.length() - 6).equals("(TEZA)")) {
+            thesis = 1;
+            grade = grade.substring(0, grade.length() - 6);
+        }
+        try {
+            SimpleDateFormat inputFormat = new SimpleDateFormat("dd-MM-yyyy");
+            Date date = inputFormat.parse(dateString);
+            java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+            String sql = "DELETE FROM grades WHERE semester = ? AND subjectId = ? AND studentId = ? AND gradeDate = ? AND thesis = ? AND grade = ? LIMIT 1";
+            PreparedStatement statement = dbContext.getConnection().prepareStatement(sql);
+            statement.setByte(1, sem);
+            statement.setInt(2, professorSubjects.get(subject));
+            statement.setInt(3, professorStudents.get(student));
+            statement.setDate(4, sqlDate);
+            statement.setByte(5, thesis);
+            statement.setFloat(6, Float.parseFloat(grade));
+            int rowsAffected = statement.executeUpdate();
+            if (rowsAffected > 0) {
+                PrintLog("Deleted grade - Semester: " + semester + ", Subject: " + subject + ", Student: " + student + ", Date: " + dateString + ", Grade: " + grade);
+            }
+            else {
+                PrintLog("Failed to delete grade - Semester: " + semester + ", Subject: " + subject + ", Student: " + student + ", Date: " + dateString + ", Grade: " + grade);
+            }
+        } catch (ParseException ex) {
+            Logger.getLogger(ProfessorsController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(ProfessorsController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

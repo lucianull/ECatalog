@@ -245,6 +245,9 @@
                       <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="gradesTableMouseClicked"/>
+                  </Events>
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="gradesTable.getTableHeader().setFont(new Font(&quot;Segoe UI&quot;, Font.PLAIN, 18));&#xa;gradesTable.getTableHeader().setForeground(foreground);&#xa;gradesTable.getTableHeader().setBackground(lightBackground);&#xa;gradesTable.getTableHeader().setBorder(BorderFactory.createMatteBorder(0, 0, 2, 0, background));&#xa;gradesTable.setBorder(BorderFactory.createLineBorder(background));&#xa;gradesTable.getTableHeader().setOpaque(true);&#xa;gradesTable.getTableHeader().setResizingAllowed(false);&#xa;gradesTable.getTableHeader().setReorderingAllowed(false);&#xa;gradesTable.getTableHeader().setDefaultRenderer(new DefaultTableCellRenderer() {&#xa;    {&#xa;        setHorizontalAlignment(JLabel.CENTER);&#xa;        setVerticalAlignment(JLabel.CENTER);&#xa;        setOpaque(true);&#xa;        setBackground(lightBackground);&#xa;        setBorder(BorderFactory.createMatteBorder(0, 0, 5, 2, background)); // set bottom and right border to background color&#xa;        setForeground(foreground);&#xa;    }&#xa;    @Override&#xa;    public Component getTableCellRendererComponent(JTable table, Object value,&#xa;            boolean isSelected, boolean hasFocus, int row, int column) {&#xa;        JComponent c = (JComponent) super.getTableCellRendererComponent(table, value,&#xa;                isSelected, hasFocus, row, column);&#xa;        c.setBorder(BorderFactory.createLineBorder(background));&#xa;        return c;&#xa;    }&#xa;});&#xa;gradesTable.getTableHeader().setPreferredSize(new Dimension(gradesTable.getTableHeader().getWidth(), 40));"/>
                   </AuxValues>
@@ -635,29 +638,21 @@
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="1" attributes="0">
+                                  <Component id="addAbsenceButton" min="-2" max="-2" attributes="0"/>
                                   <Group type="102" attributes="0">
-                                      <Component id="absencesTitle" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="81" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <Group type="103" groupAlignment="1" attributes="0">
-                                          <Component id="addAbsenceButton" min="-2" max="-2" attributes="0"/>
-                                          <Group type="102" attributes="0">
-                                              <Component id="semesterLabel1" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace min="12" pref="12" max="-2" attributes="0"/>
-                                              <Component id="semesterOption1" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                                              <Component id="subjectLabel1" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace min="12" pref="12" max="-2" attributes="0"/>
-                                              <Component id="subjectOption1" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                                              <Component id="classLabel1" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                      </Group>
-                                      <EmptySpace min="25" pref="25" max="-2" attributes="0"/>
-                                      <Component id="classOption1" min="-2" max="-2" attributes="0"/>
+                                      <Component id="semesterLabel1" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="12" pref="12" max="-2" attributes="0"/>
+                                      <Component id="semesterOption1" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="subjectLabel1" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="12" pref="12" max="-2" attributes="0"/>
+                                      <Component id="subjectOption1" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="classLabel1" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
+                              <EmptySpace min="25" pref="25" max="-2" attributes="0"/>
+                              <Component id="classOption1" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="studentLabel1" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="12" pref="12" max="-2" attributes="0"/>
@@ -665,6 +660,11 @@
                           </Group>
                       </Group>
                       <EmptySpace pref="20" max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <Component id="absencesTitle" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="275" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -753,6 +753,9 @@
                       <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="absencesTableMouseClicked"/>
+                  </Events>
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="absencesTable.getTableHeader().setFont(new Font(&quot;Segoe UI&quot;, Font.PLAIN, 18));&#xa;absencesTable.getTableHeader().setForeground(foreground);&#xa;absencesTable.getTableHeader().setBackground(lightBackground);&#xa;absencesTable.getTableHeader().setBorder(BorderFactory.createMatteBorder(0, 0, 2, 0, background));&#xa;absencesTable.setBorder(BorderFactory.createLineBorder(background));&#xa;absencesTable.getTableHeader().setOpaque(true);&#xa;absencesTable.getTableHeader().setResizingAllowed(false);&#xa;absencesTable.getTableHeader().setReorderingAllowed(false);&#xa;absencesTable.getTableHeader().setDefaultRenderer(new DefaultTableCellRenderer() {&#xa;    {&#xa;        setHorizontalAlignment(JLabel.CENTER);&#xa;        setVerticalAlignment(JLabel.CENTER);&#xa;        setOpaque(true);&#xa;        setBackground(lightBackground);&#xa;        setBorder(BorderFactory.createMatteBorder(0, 0, 5, 2, background)); // set bottom and right border to background color&#xa;        setForeground(foreground);&#xa;    }&#xa;    @Override&#xa;    public Component getTableCellRendererComponent(JTable table, Object value,&#xa;            boolean isSelected, boolean hasFocus, int row, int column) {&#xa;        JComponent c = (JComponent) super.getTableCellRendererComponent(table, value,&#xa;                isSelected, hasFocus, row, column);&#xa;        c.setBorder(BorderFactory.createLineBorder(background));&#xa;        return c;&#xa;    }&#xa;});&#xa;absencesTable.getTableHeader().setPreferredSize(new Dimension(absencesTable.getTableHeader().getWidth(), 40));"/>
                   </AuxValues>

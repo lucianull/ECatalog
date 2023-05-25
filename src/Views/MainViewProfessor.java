@@ -7,7 +7,6 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import javax.swing.BorderFactory;
-import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JViewport;
 import javax.swing.SwingConstants;
@@ -15,7 +14,10 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.JTable;
 import javax.swing.JComponent;
 import java.awt.Component;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import javax.swing.JMenuItem;
+import javax.swing.JPopupMenu;
 import javax.swing.JTextArea;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
@@ -236,6 +238,11 @@ public class MainViewProfessor extends javax.swing.JPanel {
     gradesTable.setRowHeight(30);
     gradesTable.setRowSelectionAllowed(false);
     gradesTable.setSelectionBackground(new java.awt.Color(60, 73, 82));
+    gradesTable.addMouseListener(new java.awt.event.MouseAdapter() {
+        public void mouseClicked(java.awt.event.MouseEvent evt) {
+            gradesTableMouseClicked(evt);
+        }
+    });
     gradesScrollPanel.setViewportView(gradesTable);
     gradesTable.getTableHeader().setFont(new Font("Segoe UI", Font.PLAIN, 18));
     gradesTable.getTableHeader().setForeground(foreground);
@@ -528,6 +535,11 @@ public class MainViewProfessor extends javax.swing.JPanel {
     absencesTable.setRowHeight(30);
     absencesTable.setRowSelectionAllowed(false);
     absencesTable.setSelectionBackground(new java.awt.Color(60, 73, 82));
+    absencesTable.addMouseListener(new java.awt.event.MouseAdapter() {
+        public void mouseClicked(java.awt.event.MouseEvent evt) {
+            absencesTableMouseClicked(evt);
+        }
+    });
     absencesScrollPanel.setViewportView(absencesTable);
     absencesTable.getTableHeader().setFont(new Font("Segoe UI", Font.PLAIN, 18));
     absencesTable.getTableHeader().setForeground(foreground);
@@ -630,29 +642,28 @@ public class MainViewProfessor extends javax.swing.JPanel {
                 .addGroup(absencesPanelLayout.createSequentialGroup()
                     .addGap(17, 17, 17)
                     .addGroup(absencesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(addAbsenceButton)
                         .addGroup(absencesPanelLayout.createSequentialGroup()
-                            .addComponent(absencesTitle)
-                            .addGap(81, 81, 81))
-                        .addGroup(absencesPanelLayout.createSequentialGroup()
-                            .addGroup(absencesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(addAbsenceButton)
-                                .addGroup(absencesPanelLayout.createSequentialGroup()
-                                    .addComponent(semesterLabel1)
-                                    .addGap(12, 12, 12)
-                                    .addComponent(semesterOption1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(subjectLabel1)
-                                    .addGap(12, 12, 12)
-                                    .addComponent(subjectOption1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(classLabel1)))
-                            .addGap(25, 25, 25)
-                            .addComponent(classOption1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(semesterLabel1)
+                            .addGap(12, 12, 12)
+                            .addComponent(semesterOption1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(subjectLabel1)
+                            .addGap(12, 12, 12)
+                            .addComponent(subjectOption1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(classLabel1)))
+                    .addGap(25, 25, 25)
+                    .addComponent(classOption1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                     .addComponent(studentLabel1)
                     .addGap(12, 12, 12)
                     .addComponent(studentOption1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
             .addContainerGap(20, Short.MAX_VALUE))
+        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, absencesPanelLayout.createSequentialGroup()
+            .addGap(0, 0, Short.MAX_VALUE)
+            .addComponent(absencesTitle)
+            .addGap(275, 275, 275))
     );
     absencesPanelLayout.setVerticalGroup(
         absencesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -834,6 +845,58 @@ public class MainViewProfessor extends javax.swing.JPanel {
         insertAbsences();
     }//GEN-LAST:event_addAbsenceButtonActionPerformed
 
+    private void absencesTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_absencesTableMouseClicked
+        if (evt.getButton() == MouseEvent.BUTTON3) {
+            int row = absencesTable.rowAtPoint(evt.getPoint());
+            int column = absencesTable.columnAtPoint(evt.getPoint());
+            // Show the right-click menu
+            showPopupMenuAbsences(evt.getComponent(), evt.getX(), evt.getY(), row, column);
+        }
+    }//GEN-LAST:event_absencesTableMouseClicked
+
+    private void gradesTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_gradesTableMouseClicked
+        if (evt.getButton() == MouseEvent.BUTTON3) {
+            int row = gradesTable.rowAtPoint(evt.getPoint());
+            int column = gradesTable.columnAtPoint(evt.getPoint());
+            // Show the right-click menu
+            showPopupMenuGrades(evt.getComponent(), evt.getX(), evt.getY(), row, column);
+        }
+    }//GEN-LAST:event_gradesTableMouseClicked
+    
+    private void showPopupMenuGrades(Component component, int x, int y, int row, int column) {
+        JPopupMenu popupMenu = new JPopupMenu();
+        JMenuItem deleteRowItem = new JMenuItem("Delete");
+        deleteRowItem.addActionListener(e -> {
+            // Handle delete row action
+            DefaultTableModel model = (DefaultTableModel) gradesTable.getModel();
+            String selectedSemester = (String) semesterOption.getSelectedItem();
+            String selectedSubject = (String) subjectOption.getSelectedItem();
+            String selectedStudent = (String) studentOption.getSelectedItem();
+            professorController.deleteGrade(selectedSemester, selectedSubject, selectedStudent, (String) gradesTable.getValueAt(row, 1), (String) gradesTable.getValueAt(row, 0));
+            model.removeRow(row);
+        });
+        popupMenu.add(deleteRowItem);
+
+        popupMenu.show(component, x, y);
+    }
+    
+    private void showPopupMenuAbsences(Component component, int x, int y, int row, int column) {
+        JPopupMenu popupMenu = new JPopupMenu();
+        JMenuItem deleteRowItem = new JMenuItem("Delete");
+        deleteRowItem.addActionListener(e -> {
+            // Handle delete row action
+            DefaultTableModel model = (DefaultTableModel) absencesTable.getModel();
+            String selectedSemester = (String) semesterOption1.getSelectedItem();
+            String selectedSubject = (String) subjectOption1.getSelectedItem();
+            String selectedStudent = (String) studentOption1.getSelectedItem();
+            professorController.deleteAbsence(selectedSemester, selectedSubject, selectedStudent, (String) absencesTable.getValueAt(row, column));
+            model.removeRow(row);
+        });
+        popupMenu.add(deleteRowItem);
+
+        popupMenu.show(component, x, y);
+    }
+
     private void setLabelColor(JLabel label, Color bg, Color fg) {
         label.setBackground(bg);
         label.setForeground(fg);
@@ -861,15 +924,16 @@ public class MainViewProfessor extends javax.swing.JPanel {
             model.addRow(row);
         }
     }
+
     private void insertAbsences() {
         String selectedSemester = (String) semesterOption1.getSelectedItem();
         String selectedSubject = (String) subjectOption1.getSelectedItem();
         String selectedStudent = (String) studentOption1.getSelectedItem();
-        ArrayList< String > absences = professorController.getAbsences(selectedStudent, selectedSemester, selectedSubject);
+        ArrayList< String> absences = professorController.getAbsences(selectedStudent, selectedSemester, selectedSubject);
         DefaultTableModel model = (DefaultTableModel) absencesTable.getModel();
         model.setRowCount(0);
         for (String row : absences) {
-            model.addRow(new Object[] {row});
+            model.addRow(new Object[]{row});
         }
     }
 
