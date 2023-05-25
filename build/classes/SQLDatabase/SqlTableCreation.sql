@@ -76,7 +76,7 @@ CREATE TABLE Grades (
   gradeId INT NOT NULL AUTO_INCREMENT,
   studentId INT NOT NULL,
   subjectId INT NOT NULL,
-  grade DECIMAL(3,2) NOT NULL,
+  grade DECIMAL(3,3) NOT NULL,
   gradeDate DATE NOT NULL,
   semester BIT(1) NOT NULL,
   thesis BIT(1) NOT NULL,

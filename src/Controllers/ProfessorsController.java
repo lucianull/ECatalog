@@ -123,6 +123,36 @@ public class ProfessorsController {
         }
         return grades;
     }
+    
+    public ArrayList< String > getAbsences(String student, String semester, String subject) {
+        byte sem = 0;
+        if (semester.equals("II")) {
+            sem = 1;
+        }
+        ArrayList< String > grades = new ArrayList < String >();
+        try {
+            String sql = "SELECT * FROM studentabsences WHERE studentId = ? AND subjectId = ? AND semester = ? ORDER BY absence_date";
+            PreparedStatement statement = dbContext.getConnection().prepareStatement(sql);
+            statement = dbContext.getConnection().prepareStatement(sql);
+            statement.setInt(1, professorStudents.get(student));
+            statement.setInt(2, professorSubjects.get(subject));
+            statement.setInt(3, sem);
+            ResultSet result = statement.executeQuery();
+            String grade = null;
+            String date = null;
+            while(result.next()) {
+                java.sql.Date gradeDate = result.getDate("absence_date");
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTime(gradeDate);
+                date = String.format("%02d-%02d-%04d", calendar.get(Calendar.DAY_OF_MONTH), calendar.get(Calendar.MONTH) + 1, calendar.get(Calendar.YEAR));
+                grades.add(date);
+                    
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ProfessorsController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return grades;
+    }
 
     public void insertGrade(String semester, String subject, String className, String student, float grade, byte thesis) {
         try {
@@ -141,6 +171,30 @@ public class ProfessorsController {
             statement.setDate(4, sqlDate);
             statement.setByte(5, sem);
             statement.setByte(6, thesis);
+            int rowsAffected = statement.executeUpdate();
+            if (rowsAffected > 0) {
+                System.out.println("Record inserted successfully.");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ProfessorsController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void insertAbsence(String semester, String subject, String className, String student) {
+        try {
+            byte sem = 0;
+            if (semester.equals("II")) {
+                sem = 1;
+            }
+            Date currentDate = new Date();
+            long currentTimeMillis = currentDate.getTime();
+            java.sql.Date sqlDate = new java.sql.Date(currentTimeMillis);
+            String sql = "INSERT INTO studentabsences (studentId, subjectId, absence_date, semester) VALUES (?, ?, ?, ?)";
+            PreparedStatement statement = dbContext.getConnection().prepareStatement(sql);
+            statement.setInt(1, professorStudents.get(student));
+            statement.setInt(2, professorSubjects.get(subject));
+            statement.setDate(3, sqlDate);
+            statement.setByte(4, sem);
             int rowsAffected = statement.executeUpdate();
             if (rowsAffected > 0) {
                 System.out.println("Record inserted successfully.");

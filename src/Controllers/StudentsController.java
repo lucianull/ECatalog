@@ -99,7 +99,7 @@ public class StudentsController {
         ArrayList< Absence> studentAbsences = currentStudent.getAbsences();
 
         if (studentAbsences == null) {
-            String sql = "SELECT * FROM studentabsences WHERE studentId = ?";
+            String sql = "SELECT * FROM studentabsences WHERE studentId = ? ORDER BY absence_date";
             PreparedStatement statement = dbContext.getConnection().prepareStatement(sql);
             statement = dbContext.getConnection().prepareStatement(sql);
             statement.setInt(1, currentStudent.getUserId());

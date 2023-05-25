@@ -106,9 +106,16 @@ public class MainViewProfessor extends javax.swing.JPanel {
         absencesPanel = new Views.PanelRound();
         absencesScrollPanel = new javax.swing.JScrollPane();
         absencesTable = new javax.swing.JTable();
-        semesterLabel2 = new javax.swing.JLabel();
-        semesterOption2 = new javax.swing.JComboBox<>();
+        semesterLabel1 = new javax.swing.JLabel();
+        semesterOption1 = new javax.swing.JComboBox<>();
         absencesTitle = new javax.swing.JLabel();
+        subjectLabel1 = new javax.swing.JLabel();
+        subjectOption1 = new javax.swing.JComboBox<>();
+        classLabel1 = new javax.swing.JLabel();
+        classOption1 = new javax.swing.JComboBox<>();
+        studentLabel1 = new javax.swing.JLabel();
+        studentOption1 = new javax.swing.JComboBox<>();
+        addAbsenceButton = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(43, 56, 65));
         setPreferredSize(new java.awt.Dimension(900, 600));
@@ -500,7 +507,7 @@ public class MainViewProfessor extends javax.swing.JPanel {
 
         },
         new String [] {
-            "Materie", "Data"
+            "Date"
         }
     ) {
         @Override
@@ -522,17 +529,44 @@ public class MainViewProfessor extends javax.swing.JPanel {
     absencesTable.setRowSelectionAllowed(false);
     absencesTable.setSelectionBackground(new java.awt.Color(60, 73, 82));
     absencesScrollPanel.setViewportView(absencesTable);
+    absencesTable.getTableHeader().setFont(new Font("Segoe UI", Font.PLAIN, 18));
+    absencesTable.getTableHeader().setForeground(foreground);
+    absencesTable.getTableHeader().setBackground(lightBackground);
+    absencesTable.getTableHeader().setBorder(BorderFactory.createMatteBorder(0, 0, 2, 0, background));
+    absencesTable.setBorder(BorderFactory.createLineBorder(background));
+    absencesTable.getTableHeader().setOpaque(true);
+    absencesTable.getTableHeader().setResizingAllowed(false);
+    absencesTable.getTableHeader().setReorderingAllowed(false);
+    absencesTable.getTableHeader().setDefaultRenderer(new DefaultTableCellRenderer() {
+        {
+            setHorizontalAlignment(JLabel.CENTER);
+            setVerticalAlignment(JLabel.CENTER);
+            setOpaque(true);
+            setBackground(lightBackground);
+            setBorder(BorderFactory.createMatteBorder(0, 0, 5, 2, background)); // set bottom and right border to background color
+            setForeground(foreground);
+        }
+        @Override
+        public Component getTableCellRendererComponent(JTable table, Object value,
+            boolean isSelected, boolean hasFocus, int row, int column) {
+            JComponent c = (JComponent) super.getTableCellRendererComponent(table, value,
+                isSelected, hasFocus, row, column);
+            c.setBorder(BorderFactory.createLineBorder(background));
+            return c;
+        }
+    });
+    absencesTable.getTableHeader().setPreferredSize(new Dimension(absencesTable.getTableHeader().getWidth(), 40));
 
-    semesterLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-    semesterLabel2.setForeground(new java.awt.Color(191, 205, 214));
-    semesterLabel2.setText("Semester:");
+    semesterLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+    semesterLabel1.setForeground(new java.awt.Color(191, 205, 214));
+    semesterLabel1.setText("Semester:");
 
-    semesterOption2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-    semesterOption2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "I", "II" }));
-    semesterOption2.setSelectedIndex(-1);
-    semesterOption2.addActionListener(new java.awt.event.ActionListener() {
+    semesterOption1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+    semesterOption1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "I", "II" }));
+    semesterOption1.setSelectedIndex(-1);
+    semesterOption1.addActionListener(new java.awt.event.ActionListener() {
         public void actionPerformed(java.awt.event.ActionEvent evt) {
-            semesterOption2ActionPerformed(evt);
+            semesterOption1ActionPerformed(evt);
         }
     });
 
@@ -540,37 +574,114 @@ public class MainViewProfessor extends javax.swing.JPanel {
     absencesTitle.setForeground(new java.awt.Color(191, 205, 214));
     absencesTitle.setText("Absences");
 
+    subjectLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+    subjectLabel1.setForeground(new java.awt.Color(191, 205, 214));
+    subjectLabel1.setText("Subject:");
+
+    subjectOption1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+    subjectOption1.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            subjectOption1ActionPerformed(evt);
+        }
+    });
+
+    classLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+    classLabel1.setForeground(new java.awt.Color(191, 205, 214));
+    classLabel1.setText("Class:");
+
+    classOption1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+    classOption1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "I", "II" }));
+    classOption1.setSelectedIndex(-1);
+    classOption1.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            classOption1ActionPerformed(evt);
+        }
+    });
+
+    studentLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+    studentLabel1.setForeground(new java.awt.Color(191, 205, 214));
+    studentLabel1.setText("Student:");
+
+    studentOption1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+    studentOption1.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            studentOption1ActionPerformed(evt);
+        }
+    });
+    //Dimension maximumSize = new Dimension(30, studentOption.getPreferredSize().height);
+    //studentOption.setMaximumSize(maximumSize);
+
+    addAbsenceButton.setText("Add");
+    addAbsenceButton.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            addAbsenceButtonActionPerformed(evt);
+        }
+    });
+
     javax.swing.GroupLayout absencesPanelLayout = new javax.swing.GroupLayout(absencesPanel);
     absencesPanel.setLayout(absencesPanelLayout);
     absencesPanelLayout.setHorizontalGroup(
         absencesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, absencesPanelLayout.createSequentialGroup()
-            .addGap(0, 0, Short.MAX_VALUE)
-            .addComponent(semesterLabel2)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-            .addComponent(semesterOption2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addGap(261, 261, 261))
-        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, absencesPanelLayout.createSequentialGroup()
-            .addContainerGap(48, Short.MAX_VALUE)
-            .addComponent(absencesScrollPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 566, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addGap(49, 49, 49))
         .addGroup(absencesPanelLayout.createSequentialGroup()
-            .addGap(277, 277, 277)
-            .addComponent(absencesTitle)
-            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(absencesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(absencesPanelLayout.createSequentialGroup()
+                    .addGap(48, 48, 48)
+                    .addComponent(absencesScrollPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 566, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(absencesPanelLayout.createSequentialGroup()
+                    .addGap(17, 17, 17)
+                    .addGroup(absencesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(absencesPanelLayout.createSequentialGroup()
+                            .addComponent(absencesTitle)
+                            .addGap(81, 81, 81))
+                        .addGroup(absencesPanelLayout.createSequentialGroup()
+                            .addGroup(absencesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(addAbsenceButton)
+                                .addGroup(absencesPanelLayout.createSequentialGroup()
+                                    .addComponent(semesterLabel1)
+                                    .addGap(12, 12, 12)
+                                    .addComponent(semesterOption1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(subjectLabel1)
+                                    .addGap(12, 12, 12)
+                                    .addComponent(subjectOption1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(classLabel1)))
+                            .addGap(25, 25, 25)
+                            .addComponent(classOption1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(studentLabel1)
+                    .addGap(12, 12, 12)
+                    .addComponent(studentOption1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
+            .addContainerGap(20, Short.MAX_VALUE))
     );
     absencesPanelLayout.setVerticalGroup(
         absencesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, absencesPanelLayout.createSequentialGroup()
-            .addGap(37, 37, 37)
+        .addGroup(absencesPanelLayout.createSequentialGroup()
+            .addGap(21, 21, 21)
             .addComponent(absencesTitle)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addGroup(absencesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(semesterOption2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(semesterLabel2))
-            .addGap(39, 39, 39)
-            .addComponent(absencesScrollPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addContainerGap(68, Short.MAX_VALUE))
+            .addGap(18, 18, 18)
+            .addGroup(absencesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(absencesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(absencesPanelLayout.createSequentialGroup()
+                        .addGap(3, 3, 3)
+                        .addComponent(studentLabel1))
+                    .addComponent(studentOption1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(absencesPanelLayout.createSequentialGroup()
+                    .addGroup(absencesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(semesterOption1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(subjectOption1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(classOption1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(absencesPanelLayout.createSequentialGroup()
+                            .addGap(3, 3, 3)
+                            .addGroup(absencesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(semesterLabel1)
+                                .addComponent(subjectLabel1)
+                                .addComponent(classLabel1))))
+                    .addGap(18, 18, 18)
+                    .addComponent(addAbsenceButton)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                    .addComponent(absencesScrollPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)))
+            .addGap(68, 68, 68))
     );
 
     viewport = absencesScrollPanel.getViewport();
@@ -632,15 +743,15 @@ public class MainViewProfessor extends javax.swing.JPanel {
 
     private void absencesLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_absencesLabelMouseClicked
         switchMenuLabel(absencesLabel);
+        if (subjectOption1.getItemCount() == 0) {
+            subjectOption1.setModel(new javax.swing.DefaultComboBoxModel<>(professorController.getSubjects()));
+            subjectOption1.setSelectedIndex(-1);
+        }
         showCard("absencesPanel");
     }//GEN-LAST:event_absencesLabelMouseClicked
 
     private void semesterOptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_semesterOptionActionPerformed
-        String selectedSemester = (String) semesterOption.getSelectedItem();
-        String selectedSubject = (String) subjectOption.getSelectedItem();
-//        if (selectedSemester != null && selectedSubject != null) {
-//            insertGrades(selectedSemester, selectedSubject);
-//        }
+
     }//GEN-LAST:event_semesterOptionActionPerformed
 
     private void subjectOptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subjectOptionActionPerformed
@@ -651,19 +762,9 @@ public class MainViewProfessor extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_subjectOptionActionPerformed
 
-    private void semesterOption2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_semesterOption2ActionPerformed
-        String selectedOption = (String) semesterOption2.getSelectedItem();
-//        try {
-//            ArrayList< String[]> absences = studentController.getAbsences(selectedOption);
-//            DefaultTableModel model = (DefaultTableModel) absencesTable.getModel();
-//            model.setRowCount(0);
-//            for (String[] row : absences) {
-//                model.addRow(row);
-//            }
-//        } catch (SQLException ex) {
-//            Logger.getLogger(MainViewStudent.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-    }//GEN-LAST:event_semesterOption2ActionPerformed
+    private void semesterOption1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_semesterOption1ActionPerformed
+
+    }//GEN-LAST:event_semesterOption1ActionPerformed
 
     private void classOptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_classOptionActionPerformed
         String selectedClass = (String) classOption.getSelectedItem();
@@ -701,6 +802,38 @@ public class MainViewProfessor extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_thesisCheckboxActionPerformed
 
+    private void subjectOption1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subjectOption1ActionPerformed
+        String selectedSubject = (String) subjectOption1.getSelectedItem();
+        if (selectedSubject != null) {
+            classOption1.setModel(new javax.swing.DefaultComboBoxModel<>(professorController.getClasses(selectedSubject)));
+            classOption1.setSelectedIndex(-1);
+        }
+    }//GEN-LAST:event_subjectOption1ActionPerformed
+
+    private void classOption1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_classOption1ActionPerformed
+        String selectedClass = (String) classOption1.getSelectedItem();
+        if (selectedClass != null) {
+            studentOption1.setModel(new javax.swing.DefaultComboBoxModel<>(professorController.getStudents(selectedClass)));
+            studentOption1.setSelectedIndex(-1);
+        }
+    }//GEN-LAST:event_classOption1ActionPerformed
+
+    private void studentOption1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_studentOption1ActionPerformed
+        String selectedStudent = (String) studentOption1.getSelectedItem();
+        if (selectedStudent != null) {
+            insertAbsences();
+        }
+    }//GEN-LAST:event_studentOption1ActionPerformed
+
+    private void addAbsenceButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addAbsenceButtonActionPerformed
+        String selectedSemester = (String) semesterOption1.getSelectedItem();
+        String selectedSubject = (String) subjectOption1.getSelectedItem();
+        String selectedClass = (String) classOption1.getSelectedItem();
+        String selectedStudent = (String) studentOption1.getSelectedItem();
+        professorController.insertAbsence(selectedSemester, selectedSubject, selectedClass, selectedStudent);
+        insertAbsences();
+    }//GEN-LAST:event_addAbsenceButtonActionPerformed
+
     private void setLabelColor(JLabel label, Color bg, Color fg) {
         label.setBackground(bg);
         label.setForeground(fg);
@@ -728,6 +861,17 @@ public class MainViewProfessor extends javax.swing.JPanel {
             model.addRow(row);
         }
     }
+    private void insertAbsences() {
+        String selectedSemester = (String) semesterOption1.getSelectedItem();
+        String selectedSubject = (String) subjectOption1.getSelectedItem();
+        String selectedStudent = (String) studentOption1.getSelectedItem();
+        ArrayList< String > absences = professorController.getAbsences(selectedStudent, selectedSemester, selectedSubject);
+        DefaultTableModel model = (DefaultTableModel) absencesTable.getModel();
+        model.setRowCount(0);
+        for (String row : absences) {
+            model.addRow(new Object[] {row});
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private Views.PanelRound SideMenu;
@@ -736,9 +880,12 @@ public class MainViewProfessor extends javax.swing.JPanel {
     private javax.swing.JScrollPane absencesScrollPanel;
     private javax.swing.JTable absencesTable;
     private javax.swing.JLabel absencesTitle;
+    private javax.swing.JButton addAbsenceButton;
     private javax.swing.JButton addGradeButton;
     private javax.swing.JLabel classLabel;
+    private javax.swing.JLabel classLabel1;
     private javax.swing.JComboBox<String> classOption;
+    private javax.swing.JComboBox<String> classOption1;
     private javax.swing.JLabel gradeLabel;
     private javax.swing.JTextField gradeTextField;
     private javax.swing.JLabel gradesLabel;
@@ -753,13 +900,17 @@ public class MainViewProfessor extends javax.swing.JPanel {
     private javax.swing.JTable scheduleTable;
     private javax.swing.JLabel scheduleTitleLabel;
     private javax.swing.JLabel semesterLabel;
-    private javax.swing.JLabel semesterLabel2;
+    private javax.swing.JLabel semesterLabel1;
     private javax.swing.JComboBox<String> semesterOption;
-    private javax.swing.JComboBox<String> semesterOption2;
+    private javax.swing.JComboBox<String> semesterOption1;
     private javax.swing.JLabel studentLabel;
+    private javax.swing.JLabel studentLabel1;
     private javax.swing.JComboBox<String> studentOption;
+    private javax.swing.JComboBox<String> studentOption1;
     private javax.swing.JLabel subjectLabel;
+    private javax.swing.JLabel subjectLabel1;
     private javax.swing.JComboBox<String> subjectOption;
+    private javax.swing.JComboBox<String> subjectOption1;
     private javax.swing.JCheckBox thesisCheckbox;
     private javax.swing.JLabel titleLabel;
     // End of variables declaration//GEN-END:variables
